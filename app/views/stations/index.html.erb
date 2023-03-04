@@ -1,5 +1,6 @@
 <h1 class="font-bold text-4xl">Stations WOOP WOOP!</h1>
 
 <% @stations["features"].each do |station| %>
-  <p><%= station["properties"]["Name"]%></p>
+  <p><%= link_to station["properties"]["Name"], station_path(station["properties"]["Id"]) %></p>
 <% end %>
+
