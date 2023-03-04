@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe 'Station' do
+RSpec.describe TideServices::Station do
   describe "#call" do
-    let(:service) { Station.new(station_id) }
+    let(:service) { described_class.new(station_id) }
 
     before do
       stub_request(:get, "https://admiraltyapi.azure-api.net/uktidalapi/api/V1/Stations/#{station_id}")
