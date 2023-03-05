@@ -50,7 +50,7 @@ gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
-gem 'faraday'
+gem "faraday"
 
 
 group :development, :test do
@@ -61,8 +61,9 @@ group :development, :test do
 end
 
 group :test do
-      gem "webmock"
-  end
+  gem "webmock"
+  gem "capybara"
+end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
