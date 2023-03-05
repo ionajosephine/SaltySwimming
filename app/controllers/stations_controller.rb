@@ -6,5 +6,6 @@ class StationsController < ApplicationController
 
   def show
     @station = TideServices::Station.new(params[:id]).call.body
+    @tides = TideServices::Tides.new(params[:id]).call.body
   end
 end
