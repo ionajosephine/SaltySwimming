@@ -1,0 +1,33 @@
+[{
+  "EventType": "HighWater",
+  "DateTime": "2023-03-05T05:10:00",
+  "IsApproximateTime": false,
+  "Height": 2.6465850916414739,
+  "IsApproximateHeight": false,
+  "Filtered": false,
+  "Date": "2023-03-05T00:00:00"
+}, {
+  "EventType": "LowWater",
+  "DateTime": "2023-03-05T11:28:00",
+  "IsApproximateTime": false,
+  "Height": 0.77209026375502166,
+  "IsApproximateHeight": false,
+  "Filtered": false,
+  "Date": "2023-03-05T00:00:00"
+}, {
+  "EventType": "HighWater",
+  "DateTime": "2023-03-05T17:28:00",
+  "IsApproximateTime": false,
+  "Height": 2.5670088038787329,
+  "IsApproximateHeight": false,
+  "Filtered": false,
+  "Date": "2023-03-05T00:00:00"
+}, {
+  "EventType": "LowWater",
+  "DateTime": "2023-03-05T23:28:00",
+  "IsApproximateTime": false,
+  "Height": 0.81067074543277151,
+  "IsApproximateHeight": false,
+  "Filtered": false,
+  "Date": "2023-03-05T00:00:00"
+}]

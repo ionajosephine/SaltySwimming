@@ -5,7 +5,7 @@
   <ul class="mb-4">
     <li><%= tide["EventType"] %></li>
     <li><%= DateTime.parse(tide["DateTime"]).strftime("%a %e %b at %R") %> </li>
-    <li>Tide Height: <%= tide["Height"].round(1) %>metres</li>
+    <li>Tide Height: <%= tide["Height"].round(1) %> metres</li>
   </ul>
 <% end %>
 
