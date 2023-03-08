@@ -1,6 +1,6 @@
 <h1 class="my-4 font-bold text-4xl">Stations WOOP WOOP!</h1>
 
-<% @stations["features"].each do |station| %>
-  <p><%= link_to station["properties"]["Name"], station_path(station["properties"]["Id"]) %></p>
+<% @stations.each do |station| %>
+  <p><%= link_to station.name, station_path(station.id) %></p>
 <% end %>
 

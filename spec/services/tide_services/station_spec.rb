@@ -9,7 +9,7 @@ RSpec.describe TideServices::Station do
         .to_return(status: response_status, body: file_fixture("station.json"), headers: {"Content-Type" => "application/json"})
     end
 
-    context "with real record" do
+    context "with real station record" do
       let(:station_id) { "0324" }
       let(:response_status) { 200 }
 
