@@ -1,11 +1,11 @@
 class StationsController < ApplicationController 
 
   def index 
-    @stations = TideServices::Stations.new.call
+    @stations = Station.all
   end
 
   def show
-    @station = TideServices::Station.new(params[:id]).call
-    @tides = TideServices::Tides.new(params[:id]).call
+    @station = Station.find(params[:id])
+    @tides = TideServices::Tides.new(@station.admiralty_id).call
   end
 end

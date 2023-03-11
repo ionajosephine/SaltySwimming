@@ -6,13 +6,17 @@ module TideServices
     def call
       response = make_request
       if response.success? 
-        response.body["features"].map do |feature|
-          ::Station.new(
-            name: feature["properties"]["Name"],
-            id: feature["properties"]["Id"],
-            location: feature["geometry"]["coordinates"]
-          )
+        response.body["features"].each do |feature|
+          unless ::Station.exists?(admiralty_id: feature["properties"]["Id"])
+            ::Station.create!(
+              admiralty_id: feature["properties"]["Id"],
+              name: feature["properties"]["Name"],
+              latitude: feature["geometry"]["coordinates"][1],
+              longitude: feature["geometry"]["coordinates"][0]
+            )
+          end
         end
+        return true
       else 
         raise TideError, "HTTP status #{response.status}"
       end
