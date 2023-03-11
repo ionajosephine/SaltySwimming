@@ -6,19 +6,18 @@ RSpec.describe TideServices::Station do
 
     before do
       stub_request(:get, "https://admiraltyapi.azure-api.net/uktidalapi/api/V1/Stations/#{station_id}")
-        .to_return(status: response_status, body: "{}", headers: {"Content-Type" => "application/json"})
+        .to_return(status: response_status, body: file_fixture("station.json"), headers: {"Content-Type" => "application/json"})
     end
 
-    context "with real record" do
-      let(:station_id) { "0547" }
+    context "with real station record" do
+      let(:station_id) { "0324" }
       let(:response_status) { 200 }
 
-      it "returns a 200 success response" do
-        expect(service.call.status).to eq(200)
-      end
-
-      it "returns a ruby hash" do
-        expect(service.call.body).to be_kind_of(Hash)
+      it "returns a Station object with attributes" do
+        expect(service.call).to be_kind_of(Station)
+        expect(service.call.id).to eq("0324")
+        expect(service.call.name).to eq("Rockall")
+        expect(service.call.location).to eq([-13.683333, 57.6])
       end
     end
 
@@ -26,8 +25,8 @@ RSpec.describe TideServices::Station do
       let(:station_id) { "NOT_AN_ID" }
       let(:response_status) { 404 }
 
-      it "returns a 404 status" do
-        expect(service.call.status).to eq(404)
+      it "returns a TideError" do
+        expect { service.call }.to raise_error(TideServices::TideError) 
       end
     end
   end

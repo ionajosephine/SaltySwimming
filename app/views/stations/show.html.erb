@@ -1,11 +1,11 @@
-<h1 class="font-bold text-4xl mb-4">Station: <%= @station["properties"]["Name"]%></h1>
+<h1 class="font-bold text-4xl mb-4">Station: <%= @station.name %></h1>
 
 <h2 class="font-bold text-2xl mb-4">Tides</h2>
 <% @tides.each do |tide| %>
   <ul class="mb-4">
-    <li><%= tide["EventType"] %></li>
-    <li><%= DateTime.parse(tide["DateTime"]).strftime("%a %e %b at %R") %> </li>
-    <li>Tide Height: <%= tide["Height"].round(1) %> metres</li>
+    <li><%= tide.event %></li>
+    <li><%= tide.date_time.strftime("%a %e %b at %R") %> </li>
+    <li>Tide Height: <%= tide.height %> metres</li>
   </ul>
 <% end %>
 
