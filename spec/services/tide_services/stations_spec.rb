@@ -8,17 +8,30 @@ RSpec.describe TideServices::Stations do
       stub_request(:get, "https://admiraltyapi.azure-api.net/uktidalapi/api/V1/Stations")
         .to_return(status: 200, body: file_fixture("stations.json"), headers: {"Content-Type" => "application/json"})
     end
+    
+    context "when no records exist" do
+      it "creates all stations in the database" do
+        expect { service.call }.to change { Station.count }.by(3)
+      end
 
-    it "returns 3 objects" do
-      expect(service.call.length).to eq(3)
+      it "creates a record with the correct attributes" do
+        service.call
+        record = Station.last
+        expect(record.name).to eq("Cargreen")
+        expect(record.latitude).to eq(50.45)
+        expect(record.longitude).to eq(-4.2)
+        expect(record.admiralty_id).to eq("0014B")
+      end
     end
 
-    it "returns Station instances with attributes" do
-      station = service.call.first
-      expect(station).to be_kind_of(Station)
-      expect(station.id).to eq("0322")
-      expect(station.name).to eq("Hirta (Bagh A' Bhaile)")
-      expect(station.location).to eq([-8.566666, 57.8])
+    context "when one record already exists" do
+      before do
+        FactoryBot.create(:station, admiralty_id: "0322")
+      end
+
+      it "creates only 2 stations in the database" do
+        expect { service.call }.to change { Station.count }.by(2)
+      end
     end
   end
 end
