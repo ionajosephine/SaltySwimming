@@ -1,0 +1,6 @@
+<h1> See all your tidal pools and swim spots in one place! </h1>
+
+<% @spots.each do |spot| %>
+  <p><%= link_to spot.name, spot_path(spot.id) %></p>
+<% end %>
+
