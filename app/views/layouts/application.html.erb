@@ -16,7 +16,7 @@
     <% if user_signed_in? %>
       <%= link_to "Profile", edit_user_registration_path %>
       <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete } %>
-      <%= link_to_unless_current("Spots", { action: "index" }) %>
+      <%= link_to_unless_current("Spots", { controller: "/spots", action: "index" }) %>
 
     <% else %>
       <%= link_to "Log in", new_user_session_path %>

@@ -1,21 +1,20 @@
 class SpotsController < ApplicationController
   before_action :authenticate_user!
+  before_action :load_spots
 
   def index
-   @spots = Spot.all
   end
 
   def show
-    @spot = Spot.find(params[:id])
+    @spot = @spots.find(params[:id])
   end
 
   def new
-    @spot = Spot.new
+    @spot = @spots.new
   end
 
   def create
-    @spot = Spot.new(spot_params)
-    @spot.user = current_user
+    @spot = @spots.new(spot_params)
 
     if @spot.save
       redirect_to @spot
@@ -25,12 +24,11 @@ class SpotsController < ApplicationController
   end
 
   def edit
-    @spot = Spot.find(params[:id])
+    @spot = @spots.find(params[:id])
   end
 
   def update
-    @spot = Spot.find(params[:id])
-    @spot.user = current_user
+    @spot = @spots.find(params[:id])
 
     if @spot.update(spot_params)
       redirect_to @spot
@@ -40,7 +38,7 @@ class SpotsController < ApplicationController
   end
 
   def destroy
-    @spot = Spot.find(params[:id])
+    @spot = @spots.find(params[:id])
     @spot.destroy
 
     redirect_to spots_path, status: :see_other
@@ -49,6 +47,10 @@ class SpotsController < ApplicationController
   private
 
     def spot_params
-      params.require(:spot).permit(:name, :latitude, :longitude, :user_id)
+      params.require(:spot).permit(:name, :latitude, :longitude)
+    end
+
+    def load_spots
+      @spots = current_user.spots
     end
 end
