@@ -1,5 +1,6 @@
 <h1>Swim spot: <%= @spot.name %></h1>
 <h3>Latitude: <%= @spot.latitude %>, Longitude: <%= @spot.longitude %></h3>
+<h3>Nearest Station: <%= @spot.station&.name || "Not assigned" %></h3>
 <p>
   <%= link_to "Edit", edit_spot_path(@spot) %>
   <%= link_to "Destroy", spot_path(@spot), data: {
