@@ -7,6 +7,8 @@ class SpotsController < ApplicationController
 
   def show
     @spot = @spots.find(params[:id])
+    @station = Station.find(@spot.station_id)
+    @tides = TideServices::Tides.new(@station.admiralty_id).call
   end
 
   def new
