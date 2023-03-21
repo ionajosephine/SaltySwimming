@@ -7,8 +7,9 @@ class SpotsController < ApplicationController
 
   def show
     @spot = @spots.find(params[:id])
-    @station = Station.find(@spot.station_id)
-    @tides = TideServices::Tides.new(@station.admiralty_id).call
+    if @station = Station.find_by(id: @spot.station_id)
+      @tides = TideServices::Tides.new(@station.admiralty_id).call
+    end
   end
 
   def new
@@ -49,7 +50,7 @@ class SpotsController < ApplicationController
   private
 
     def spot_params
-      params.require(:spot).permit(:name, :latitude, :longitude)
+      params.require(:spot).permit(:name, :latitude, :longitude, :condition)
     end
 
     def load_spots

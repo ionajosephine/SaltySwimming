@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_102105) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "station_id"
-    t.integer "conditions"
+    t.integer "condition"
     t.index ["station_id"], name: "index_spots_on_station_id"
     t.index ["user_id"], name: "index_spots_on_user_id"
   end

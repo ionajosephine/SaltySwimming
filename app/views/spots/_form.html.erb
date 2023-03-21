@@ -24,6 +24,16 @@
   </div>
 
   <div>
+    <% Spot.conditions.keys.each do |condition| %>
+      <%= form.radio_button :condition, condition %>
+      <%= form.label "condition_#{condition}" %><br>
+    <% end %>
+    <% spot.errors.full_messages_for(:condition).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div><br>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

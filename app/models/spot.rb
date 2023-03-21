@@ -3,7 +3,7 @@ class Spot < ApplicationRecord
   belongs_to :station, optional: true
   validates :latitude, :longitude, :name, presence: true
 
-  enum conditions: [:high_tide, :low_tide, :other]
+  enum condition: [:high_tide, :low_tide, :other]
 
   before_save :set_station
 
