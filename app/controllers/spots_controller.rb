@@ -7,10 +7,7 @@ class SpotsController < ApplicationController
   end
 
   def show
-    @spot = @spots.find(params[:id])
-    if @spot.station
-      @tides = TideServices::Tides.new(@spot.station.admiralty_id).call
-    end
+    @spot = @spots.find(params[:id]).decorate
   end
 
   def new

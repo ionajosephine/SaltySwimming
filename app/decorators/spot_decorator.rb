@@ -26,10 +26,12 @@ class SpotDecorator < Draper::Decorator
     preferred_tides
   end
 
-
-
-
-
-
-
+  # Returns a hash of tides grouped by date. Example:
+  # { 
+  #   <#Date ...> => [ <#Tide ...>, <#Tide ...> ], 
+  #   <#Date ...> => [ <#Tide ...>, <#Tide ...> ]
+  # } 
+  def grouped_tides(method_name)
+    public_send("tides_#{method_name}").group_by { |tide| tide.date_time.to_date }
+  end
 end
