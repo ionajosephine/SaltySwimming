@@ -3,12 +3,13 @@ class SpotsController < ApplicationController
   before_action :load_spots
 
   def index
+    @spots = @spots.decorate
   end
 
   def show
     @spot = @spots.find(params[:id])
-    if @station = Station.find_by(id: @spot.station_id)
-      @tides = TideServices::Tides.new(@station.admiralty_id).call
+    if @spot.station
+      @tides = TideServices::Tides.new(@spot.station.admiralty_id).call
     end
   end
 
