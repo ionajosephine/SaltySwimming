@@ -9,7 +9,7 @@
 
   <div>
     <%= form.label :latitude %><br>
-    <%= form.number_field :latitude %><br>
+    <%= form.text_field :latitude %><br>
     <% spot.errors.full_messages_for(:latitude).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -17,11 +17,21 @@
 
   <div>
     <%= form.label :longitude %><br>
-    <%= form.number_field :longitude %><br>
+    <%= form.text_field :longitude %><br>
     <% spot.errors.full_messages_for(:longitude).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
+
+  <div>
+    <% Spot.conditions.keys.each do |condition| %>
+      <%= form.radio_button :condition, condition %>
+      <%= form.label "condition_#{condition}" %><br>
+    <% end %>
+    <% spot.errors.full_messages_for(:condition).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div><br>
 
   <div>
     <%= form.submit %>

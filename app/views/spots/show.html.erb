@@ -1,5 +1,7 @@
 <h1>Swim spot: <%= @spot.name %></h1>
 <h3>Latitude: <%= @spot.latitude %>, Longitude: <%= @spot.longitude %></h3>
+<h3>Nearest Station: <%= @spot.station&.name || "Not assigned" %></h3>
+<p>The conditions required for this spot: <%= @spot.condition || "Not set yet" %></p>
 <p>
   <%= link_to "Edit", edit_spot_path(@spot) %>
   <%= link_to "Destroy", spot_path(@spot), data: {
@@ -7,3 +9,16 @@
                     turbo_confirm: "Are you sure?"
                   } %>
 </p>
+
+<h2 class="font-bold text-2xl mb-4">Tides</h2>
+<% if @tides %>
+  <% @tides.each do |tide| %>
+    <ul class="mb-4">
+      <li><%= tide.event %></li>
+      <li><%= tide.date_time.strftime("%a %e %b at %R") %> </li>
+      <li>Tide Height: <%= tide.height %> metres</li>
+    </ul>
+  <% end %>
+<% else %>
+  <p>There is no tide data available for this spot.</p>
+<% end %>
