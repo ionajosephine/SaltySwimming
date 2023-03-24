@@ -1,6 +1,28 @@
 <h1> See all your tidal pools and swim spots in one place! </h1>
 
 <% @spots.each do |spot| %>
-  <p><%= link_to spot.name, spot_path(spot.id) %></p>
+  <h2 class="font-bold text-2xl mt-5 mb-2"><%= link_to spot.name, spot_path(spot.id) %></h2>
+  <ul>
+    <% spot.grouped_tides(:today_and_tomorrow).each do |date, tides|%>
+    <li>
+      <b>
+        <% if date.today? %>
+          Today
+        <% elsif date.tomorrow? %>
+          Tomorrow
+        <% else %>
+          <%= date.strftime("%a %e %b") %> 
+        <% end %>
+      </b><br>
+      <ul>
+        <% tides.each do |tide| %>
+          <li><%= tide.event.humanize %> at <%= tide.date_time.strftime("%R") %> with height of <%= tide.height %> metres </li>
+        <% end %>
+      </ul>
+    </li>
+    <% end %>
+  </ul>
 <% end %>
+
+
 

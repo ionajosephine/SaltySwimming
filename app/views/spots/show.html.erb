@@ -1,7 +1,8 @@
 <h1>Swim spot: <%= @spot.name %></h1>
 <h3>Latitude: <%= @spot.latitude %>, Longitude: <%= @spot.longitude %></h3>
 <h3>Nearest Station: <%= @spot.station&.name || "Not assigned" %></h3>
-<p>The conditions required for this spot: <%= @spot.condition || "Not set yet" %></p>
+<p>The conditions required for this spot: <%= @spot.condition&.humanize || "Not set yet" %></p>
+<p>Notes: <%= @spot.notes %>
 <p>
   <%= link_to "Edit", edit_spot_path(@spot) %>
   <%= link_to "Destroy", spot_path(@spot), data: {
@@ -10,15 +11,30 @@
                   } %>
 </p>
 
-<h2 class="font-bold text-2xl mb-4">Tides</h2>
-<% if @tides %>
-  <% @tides.each do |tide| %>
-    <ul class="mb-4">
-      <li><%= tide.event %></li>
-      <li><%= tide.date_time.strftime("%a %e %b at %R") %> </li>
-      <li>Tide Height: <%= tide.height %> metres</li>
-    </ul>
-  <% end %>
+<h2 class="font-bold text-2xl mb-4">When's good for <%= @spot.name %>?</h2>
+<% if @spot.station_id %>
+  <ul>
+    <% @spot.grouped_tides(:seven_days).each do |date, tides|%>
+    <li>
+      <b>
+        <% if date.today? %>
+          Today
+        <% elsif date.tomorrow? %>
+          Tomorrow
+        <% else %>
+          <%= date.strftime("%a %e %b") %> 
+        <% end %>
+      </b><br>
+      <ul>
+        <% tides.each do |tide| %>
+          <li><%= tide.event.humanize %> at <%= tide.date_time.strftime("%R") %> with height of <%= tide.height %> metres </li>
+        <% end %>
+      </ul>
+    </li>
+    <% end %>
+  </ul>
 <% else %>
   <p>There is no tide data available for this spot.</p>
 <% end %>
+
+

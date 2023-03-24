@@ -3,13 +3,11 @@ class SpotsController < ApplicationController
   before_action :load_spots
 
   def index
+    @spots = @spots.decorate
   end
 
   def show
-    @spot = @spots.find(params[:id])
-    if @station = Station.find_by(id: @spot.station_id)
-      @tides = TideServices::Tides.new(@station.admiralty_id).call
-    end
+    @spot = @spots.find(params[:id]).decorate
   end
 
   def new
@@ -50,7 +48,7 @@ class SpotsController < ApplicationController
   private
 
     def spot_params
-      params.require(:spot).permit(:name, :latitude, :longitude, :condition)
+      params.require(:spot).permit(:name, :latitude, :longitude, :condition, :notes)
     end
 
     def load_spots
