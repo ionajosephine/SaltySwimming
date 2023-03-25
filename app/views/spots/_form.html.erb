@@ -77,6 +77,14 @@
 
   // Add the geocoder to the map
   map.addControl(geocoder);
+  
+  map.on('load', () => {
+    geocoder.on('result', (event) => {
+      document.querySelector('#spot_longitude').value = event.result.geometry.coordinates[0]
+      document.querySelector('#spot_latitude').value = event.result.geometry.coordinates[1]
+    });
+  })
+
 </script>
 
 
