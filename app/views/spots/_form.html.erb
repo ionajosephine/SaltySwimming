@@ -45,3 +45,38 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />
+
+<div class="w-96 h-96 bg-pink-200" id='map'></div>
+
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoiaW9uYWpvc2VwaGluZSIsImEiOiJjbGZvMm5iMGkwczBqNDRyMndkMGlhazI3In0.bE3vEzdNG5IGV1yzhu3gGg';
+  const map = new mapboxgl.Map({
+    container: 'map', // Container ID
+    style: 'mapbox://styles/mapbox/satellite-v8', // Map style to use
+    center: [-3.238913, 54.130740], // Starting position [lng, lat]
+    zoom: 4, // Starting zoom level
+  });
+
+  // const marker = new mapboxgl.Marker() // initialize a new marker
+  // .setLngLat([-3.063007, 53.407593]) // Marker [lng, lat] coordinates
+  // .addTo(map); // Add the marker to the map
+
+  const geocoder = new MapboxGeocoder({
+    // Initialize the geocoder
+    accessToken: mapboxgl.accessToken, // Set the access token
+    placeholder: "eg: Dragon's Bay",
+    bbox: [-7.57216793459, 49.959999905, 1.68153079591, 58.6350001085], // Boundary for UK
+    mapboxgl: mapboxgl, // Set the mapbox-gl instance
+    // marker: false // Do not use the default marker style
+  });
+
+  // Add the geocoder to the map
+  map.addControl(geocoder);
+</script>
+
+
