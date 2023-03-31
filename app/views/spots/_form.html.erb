@@ -45,3 +45,21 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<%= content_tag :div, data: 
+  { 
+    controller: "map",
+    map_access_token_value: "pk.eyJ1IjoiaW9uYWpvc2VwaGluZSIsImEiOiJjbGZvMm5iMGkwczBqNDRyMndkMGlhazI3In0.bE3vEzdNG5IGV1yzhu3gGg",
+    map_latitude_value: @spot.latitude,
+    map_longitude_value: @spot.longitude,
+    map_zoom_value: @spot.persisted? ? 12 : nil,
+    map_marker_value: @spot.persisted?,
+    map_geocoder_value: true
+  } do %>
+  <div class="w-96 h-96 bg-pink-200" id='map' data-map-target='map'></div>
+<% end %>
+
+
+
+
+
