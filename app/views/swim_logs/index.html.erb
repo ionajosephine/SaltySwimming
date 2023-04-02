@@ -1,0 +1,8 @@
+<h1>Swim Logs All</h1>
+<ul><% @swim_logs.each do |log| %>
+  <li>You logged a swim on <%= log.swim_date %></li>
+  <li>at <%= log.swim_time %></li>
+  <li>Notes: <%= log.notes %></li>
+<% end %>
+</ul>
+

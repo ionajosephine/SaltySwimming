@@ -1,0 +1,70 @@
+<%= form_with(model: @swim_log, url: swim_logs_path, local: true) do |form| %>
+  <%= form.label :spot_id, "Where did you swim?" %>
+  
+  <div class="flex justify-center space-x-4">
+  <% @spots.each do |spot| %>
+    <label>
+      <%= radio_button_tag 'swim_log[spot_id]', spot.id, false, class: 'hidden' %>
+      <span class="p-2 rounded-lg bg-gray-200 hover:bg-gray-300 cursor-pointer">
+        <%= spot.name %>
+      </span>
+    </label>
+  <% end %>
+</div>
+
+
+  <%= form.label :swim_date, "Which day did you swim?" %>
+  <%= form.date_field :swim_date, class: "form-input rounded-md shadow-sm mt-1 block w-full" %>
+  <% swim_log.errors.full_messages_for(:swim_date).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+
+  
+
+  <%= form.label :swim_time, "What time did you swim?" %>
+  <%= form.time_field :swim_time, class: "form-input rounded-md shadow-sm mt-1 block w-full" %>
+  <% swim_log.errors.full_messages_for(:swim_time).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+
+  
+
+  <%= form.label :notes, "Notes" %>
+  <%= form.text_area :notes, class: "form-input rounded-md shadow-sm mt-1 block w-full" %>
+  <% swim_log.errors.full_messages_for(:notes).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+
+  <%= form.submit "Log Swim", class: "mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+
+<% end %>
+
+
+
+
+
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  <% current_user.spots.each do |spot| %>
+    <div class="bg-white shadow-md rounded-md p-4">
+      <h2 class="text-lg font-medium text-gray-900 mb-2"><%= spot.name %></h2>
+      <a href="#" class="text-indigo-600 hover:text-indigo-700">Select spot</a>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
