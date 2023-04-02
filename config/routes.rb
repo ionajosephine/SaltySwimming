@@ -8,4 +8,5 @@ Rails.application.routes.draw do
 
   resources :stations, only: [:index, :show]
   resources :spots
+  resources :swim_logs
 end

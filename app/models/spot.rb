@@ -1,6 +1,7 @@
 class Spot < ApplicationRecord
   belongs_to :user
   belongs_to :station, optional: true
+  has_many :swim_logs
   validates :latitude, :longitude, :name, presence: true
 
   enum condition: [:high_water, :low_water, :other]
