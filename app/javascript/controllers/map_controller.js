@@ -35,6 +35,7 @@ export default class extends Controller {
         placeholder: "eg: Dragon's Bay",
         bbox: [-7.57216793459, 49.959999905, 1.68153079591, 58.6350001085], // Boundary for UK
         mapboxgl: mapboxgl, // Set the mapbox-gl instance
+        marker: false // Do not use the default marker style
       });
     
       // Add the geocoder to the map
@@ -42,13 +43,56 @@ export default class extends Controller {
 
       // Populate the lat/lon form inputs automatically from the result of the user's map search
       map.on('load', () => {
-        geocoder.on('result', (event) => {
-          document.querySelector('#spot_longitude').value = event.result.geometry.coordinates[0]
-          document.querySelector('#spot_latitude').value = event.result.geometry.coordinates[1]
+        map.addSource('single-point', {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: []
+          }
         });
+      
+        map.addLayer({
+          id: 'point',
+          source: 'single-point',
+          type: 'circle',
+          paint: {
+            'circle-radius': 10,
+            'circle-color': '#448ee4'
+          }
+        });
+
+        map.on('click', (event) => {
+          updateLocation(event.lngLat.lng, event.lngLat.lat)
+        });
+
+        geocoder.on('result', (event) => {
+          updateLocation(event.result.geometry.coordinates[0], event.result.geometry.coordinates[1])
+        });
+
+        function updateLocation(lon, lat) {
+          //updates the form fields for lat and lon
+          document.querySelector('#spot_longitude').value = lon;
+          document.querySelector('#spot_latitude').value = lat;
+          //updates the location of the point on the map
+          map.getSource('single-point').setData({
+            coordinates: [lon, lat],
+            type: 'Point'
+          });
+        }
       })
     }
   }
 }
+
+
+
+// this.marker = new mapboxgl.Marker();
+// this.map.on('click', this.add_marker.bind(this));
+
+// add_marker: function (event) {
+//   var coordinates = event.lngLat;
+//   console.log('Lng:', coordinates.lng, 'Lat:', coordinates.lat);
+//   this.marker.setLngLat(coordinates).addTo(this.map);
+// }
 
 
