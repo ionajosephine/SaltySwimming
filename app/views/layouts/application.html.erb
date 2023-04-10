@@ -17,19 +17,31 @@
   </head>
 
   <body>
+    <nav class="bg-purple-100 py-5 px-4 text-purple-900">
+      <div class="max-w-screen-md w-full mx-auto flex justify-between">
+        <div class="flex text-xl gap-x-4">
+          <div class="scale-150">🧜‍♀️</div>
+          <%= link_to "Tide To Swim", root_path, class: "font-bold" %>
+        </div>
+        <div class="flex gap-x-5 font-semibold">
+          <%= link_to_unless_current("Spots", { controller: "/spots", action: "index" }) %>
+          <% if user_signed_in? %>
+            <%= link_to "Profile", edit_user_registration_path %>
+            <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete } %>
+          <% else %>
+            <%= link_to "Log in", new_user_session_path %>
+            <%= link_to "Register", new_user_registration_path %>
+          <% end %>
+
+        </div>
+      </div>
+    </nav>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <% if user_signed_in? %>
-      <%= link_to "Profile", edit_user_registration_path %>
-      <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete } %>
-      <%= link_to_unless_current("Spots", { controller: "/spots", action: "index" }) %>
-      <%= link_to_unless_current("New Spot", { controller: "/spots", action: "new" }) %>
-
-
-    <% else %>
-      <%= link_to "Log in", new_user_session_path %>
-      <%= link_to "Register", new_user_registration_path %>
-    <% end %>
-    <%= yield %>
+    
+    <div class="max-w-screen-md w-full mx-auto">
+      <%= yield %>
+    </div>
   </body>
 </html>
