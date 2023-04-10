@@ -41,7 +41,6 @@ export default class extends Controller {
       // Add the geocoder to the map
       map.addControl(geocoder);
 
-      // Populate the lat/lon form inputs automatically from the result of the user's map search
       map.on('load', () => {
         map.addSource('single-point', {
           type: 'geojson',
