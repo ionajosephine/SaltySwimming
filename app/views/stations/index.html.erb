@@ -1,6 +1,6 @@
-<h1 class="my-4 font-bold text-4xl">Stations WOOP WOOP!</h1>
+<div class="w-full h-screen">
+  <%= image_tag "hero.jpg", class: "object-cover w-full h-full" %>
+</div>
 
-<% @stations.each do |station| %>
-  <p><%= link_to station.name, station_path(station.id) %></p>
-<% end %>
+
 
