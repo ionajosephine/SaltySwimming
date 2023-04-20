@@ -1,52 +1,53 @@
-<h1>Swim spot: <%= @spot.name %></h1>
-<h3>Latitude: <%= @spot.latitude %>, Longitude: <%= @spot.longitude %></h3>
-<h3>Nearest Station: <%= @spot.station&.name || "Not assigned" %></h3>
-<p>The conditions required for this spot: <%= @spot.condition&.humanize || "Not set yet" %></p>
-<p>Notes: <%= @spot.notes %>
-<p>
-  <%= link_to "Edit", edit_spot_path(@spot) %>
-  <%= link_to "Destroy", spot_path(@spot), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %>
-</p>
+<div class="max-w-screen-md w-full mx-auto">
+  <h1>Swim spot: <%= @spot.name %></h1>
+  <h3>Latitude: <%= @spot.latitude %>, Longitude: <%= @spot.longitude %></h3>
+  <h3>Nearest Station: <%= @spot.station&.name || "Not assigned" %></h3>
+  <p>The conditions required for this spot: <%= @spot.condition&.humanize || "Not set yet" %></p>
+  <p>Notes: <%= @spot.notes %>
+  <p>
+    <%= link_to "Edit", edit_spot_path(@spot) %>
+    <%= link_to "Destroy", spot_path(@spot), data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    } %>
+  </p>
 
-<h2 class="font-bold text-2xl mb-4">When's good for <%= @spot.name %>?</h2>
-<% if @spot.station_id %>
-  <ul>
-    <% @spot.grouped_tides(:seven_days).each do |date, tides|%>
-    <li>
-      <b>
-        <% if date.today? %>
-          Today
-        <% elsif date.tomorrow? %>
-          Tomorrow
-        <% else %>
-          <%= date.strftime("%a %e %b") %> 
-        <% end %>
-      </b><br>
-      <ul>
-        <% tides.each do |tide| %>
-          <li><%= tide.event.humanize %> at <%= tide.date_time.strftime("%R") %> with height of <%= tide.height %> metres </li>
-        <% end %>
-      </ul>
-    </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>There is no tide data available for this spot.</p>
-<% end %>
+  <h2 class="font-bold text-2xl mb-4">When's good for <%= @spot.name %>?</h2>
+  <% if @spot.station_id %>
+    <ul>
+      <% @spot.grouped_tides(:seven_days).each do |date, tides|%>
+      <li>
+        <b>
+          <% if date.today? %>
+            Today
+          <% elsif date.tomorrow? %>
+            Tomorrow
+          <% else %>
+            <%= date.strftime("%a %e %b") %> 
+          <% end %>
+        </b><br>
+        <ul>
+          <% tides.each do |tide| %>
+            <li><%= tide.event.humanize %> at <%= tide.date_time.strftime("%R") %> with height of <%= tide.height %> metres </li>
+          <% end %>
+        </ul>
+      </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>There is no tide data available for this spot.</p>
+  <% end %>
 
 
-<div data-controller="map" 
-  data-map-access-token-value="pk.eyJ1IjoiaW9uYWpvc2VwaGluZSIsImEiOiJjbGZvMm5iMGkwczBqNDRyMndkMGlhazI3In0.bE3vEzdNG5IGV1yzhu3gGg"
-  data-map-latitude-value="<%= @spot.latitude %>"
-  data-map-longitude-value="<%= @spot.longitude %>"
-  data-map-zoom-value="12"
-  data-map-marker-value="true">
-  <div class="w-96 h-96 bg-pink-200" data-map-target='map'></div>
+  <div data-controller="map" 
+    data-map-access-token-value="pk.eyJ1IjoiaW9uYWpvc2VwaGluZSIsImEiOiJjbGZvMm5iMGkwczBqNDRyMndkMGlhazI3In0.bE3vEzdNG5IGV1yzhu3gGg"
+    data-map-latitude-value="<%= @spot.latitude %>"
+    data-map-longitude-value="<%= @spot.longitude %>"
+    data-map-zoom-value="12"
+    data-map-marker-value="true">
+    <div class="w-96 h-96 bg-pink-200" data-map-target='map'></div>
+  </div>
 </div>
-
 
 
 

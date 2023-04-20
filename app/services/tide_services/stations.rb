@@ -2,7 +2,6 @@ require_relative 'base'
 
 module TideServices
   class Stations < Base
-    
     def call
       response = make_request
       if response.success? 

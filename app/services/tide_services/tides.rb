@@ -7,8 +7,6 @@ module TideServices
       @station_id = station_id
     end
 
-    # TODO: return an array of Tide objects
-
     def call
       response = make_request
       if response.success?
