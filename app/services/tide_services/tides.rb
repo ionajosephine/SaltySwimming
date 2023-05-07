@@ -20,6 +20,7 @@ module TideServices
         end
       else
         raise TideError, "HTTP status #{response.status}"
+        raise TideError.new("HTTP status #{response.status}")
       end
     end
 
