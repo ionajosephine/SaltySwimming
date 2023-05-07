@@ -84,3 +84,5 @@ production:
   database: tides_production
   username: tides
   password: <%= ENV["TIDES_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
+
