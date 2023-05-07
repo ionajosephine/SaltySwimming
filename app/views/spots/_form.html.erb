@@ -1,7 +1,7 @@
 <%= form_with model: spot do |form| %>
   <div>
     <%= form.label :name %><br>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: "form-input" %>
     <% spot.errors.full_messages_for(:name).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -9,7 +9,7 @@
 
   <div>
     <%= form.label :latitude %><br>
-    <%= form.text_field :latitude %><br>
+    <%= form.text_field :latitude, class: "form-input" %><br>
     <% spot.errors.full_messages_for(:latitude).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -17,7 +17,7 @@
 
   <div>
     <%= form.label :longitude %><br>
-    <%= form.text_field :longitude %><br>
+    <%= form.text_field :longitude, class: "form-input" %><br>
     <% spot.errors.full_messages_for(:longitude).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -35,14 +35,14 @@
 
   <div>
     <%= form.label :notes %><br>
-    <%= form.text_field :notes %>
+    <%= form.text_field :notes, class: "form-input" %>
     <% spot.errors.full_messages_for(:notes).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn px-3 py-1.5 my-2" %>
   </div>
 <% end %>
 

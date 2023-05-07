@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.form-input {
+  @apply bg-purple-200 rounded-lg;
+}
+
+.btn {
+  @apply rounded-lg bg-violet-700 text-white font-medium;
+}

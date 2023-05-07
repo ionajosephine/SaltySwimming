@@ -7,8 +7,6 @@ module TideServices
       @station_id = station_id
     end
 
-    # TODO: return an array of Tide objects
-
     def call
       response = make_request
       if response.success?
@@ -22,6 +20,7 @@ module TideServices
         end
       else
         raise TideError, "HTTP status #{response.status}"
+        raise TideError.new("HTTP status #{response.status}")
       end
     end
 
