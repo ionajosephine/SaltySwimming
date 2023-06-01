@@ -1,18 +1,6 @@
 <div class="max-w-screen-md w-full mx-auto">
-  <h1>Swim spot: <%= @spot.name %></h1>
-  <h3>Latitude: <%= @spot.latitude %>, Longitude: <%= @spot.longitude %></h3>
-  <h3>Nearest Station: <%= @spot.station&.name || "Not assigned" %></h3>
-  <p>The conditions required for this spot: <%= @spot.condition&.humanize || "Not set yet" %></p>
-  <p>Notes: <%= @spot.notes %>
-  <p>
-    <%= link_to "Edit", edit_spot_path(@spot) %>
-    <%= link_to "Destroy", spot_path(@spot), data: {
-                      turbo_method: :delete,
-                      turbo_confirm: "Are you sure?"
-                    } %>
-  </p>
+  <h2 class="h2">When's good for <%= @spot.name %>?</h2>
 
-  <h2 class="font-bold text-2xl mb-4">When's good for <%= @spot.name %>?</h2>
   <% if @spot.station_id %>
     <ul>
       <% @spot.grouped_tides(:seven_days).each do |date, tides|%>
@@ -31,13 +19,14 @@
             <li><%= tide.event.humanize %> at <%= tide.date_time.strftime("%R") %> with height of <%= tide.height %> metres </li>
           <% end %>
         </ul>
-      </li>
+      </li><br>
       <% end %>
     </ul>
   <% else %>
     <p>There is no tide data available for this spot.</p>
   <% end %>
 
+  <h2 class="h2">Technical Info for <%= @spot.name %></h2>
 
   <div data-controller="map" 
     data-map-access-token-value="pk.eyJ1IjoiaW9uYWpvc2VwaGluZSIsImEiOiJjbGZvMm5iMGkwczBqNDRyMndkMGlhazI3In0.bE3vEzdNG5IGV1yzhu3gGg"
@@ -47,7 +36,24 @@
     data-map-marker-value="true">
     <div class="w-96 h-96 bg-pink-200" data-map-target='map'></div>
   </div>
+  <br>
+  <p>The latitude for this spot is <%= @spot.latitude %> and the longitude is <%= @spot.longitude %>. The tidal data for this spot comes from <%= @spot.station&.name || "Not assigned" %>.</p>
+  <h3 class="h3">You have set the conditions required for this spot to be:</h3>
+  <p> <%= @spot.condition&.humanize || "Not set yet" %></p>
+  <h3 class="h3">Your notes for this spot:</h3>
+   <p><%= @spot.notes %></p>
+  <br><br>
+  <p>
+    <%= link_to "Edit these details", edit_spot_path(@spot), class: "btn-edit" %>
+    <%= link_to "Destroy this spot", spot_path(@spot), class: "btn-destroy", data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    } %>
+  </p>
+  <br><br>
 </div>
 
+
+  
 
 

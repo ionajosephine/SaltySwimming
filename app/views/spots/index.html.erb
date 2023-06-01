@@ -1,10 +1,11 @@
 <div class="max-w-screen-md w-full mx-auto">
-  <h1> See all your tidal pools and swim spots in one place! </h1>
-  <%= link_to "New Spot", new_spot_path, class: "btn px-3 py-1.5 my-2" %>
+  <h2 class="h2"> See all your tidal pools and swim spots in one place! </h2>
 
   <% @spots.each do |spot| %>
-    <h2 class="font-bold text-2xl mt-5 mb-2"><%= link_to spot.name, spot_path(spot.id) %></h2>
+    <h2 class="h2"><%= link_to spot.name, spot_path(spot.id) %></h2>
     <ul>
+      <li><%= link_to "See full 7 day forecast ->", spot_path(spot.id), class: "btn-other" %></li>  
+
       <% spot.grouped_tides(:today_and_tomorrow).each do |date, tides|%>
       <li>
         <b>
@@ -25,6 +26,9 @@
       <% end %>
     </ul>
   <% end %>
+  <br>
+  <%= link_to "Add a New Spot!", new_spot_path, class: "btn px-3 py-1.5 my-2" %>
+  <br><br>
 </div>
 
 
