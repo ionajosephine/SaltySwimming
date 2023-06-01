@@ -7,7 +7,7 @@
 }
 
 .btn {
-  @apply rounded-lg bg-violet-700 text-white font-medium;
+  @apply rounded-lg bg-violet-700 text-white font-medium px-3 py-1.5 my-2;
 }
 
 .btn-destroy {
@@ -16,6 +16,10 @@
 
 .btn-edit {
   @apply rounded-lg bg-yellow-400 text-black font-medium px-3 py-1.5 my-2; 
+}
+
+.btn-other {
+  @apply rounded-lg bg-violet-300 text-black px-3 py-1.5 my-2;
 }
 
 .h2 {

@@ -1,12 +1,46 @@
 <%= form_with model: spot do |form| %>
   <div>
-    <%= form.label :name %><br>
+    <%= form.label "Give your swim spot a name", class: "font-semibold" %><br>
     <%= form.text_field :name, class: "form-input" %>
     <% spot.errors.full_messages_for(:name).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
+  <br>
+  <div>
+    <p class="font-semibold">Does this swim spot appear at high or low tide?</p>
+    <% Spot.conditions.keys.each do |condition| %>
+      <%= form.radio_button :condition, condition %>
+      <%= form.label "condition_#{condition}" %><br>
+    <% end %>
+    <% spot.errors.full_messages_for(:condition).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div><br>
 
+  <div>
+    <%= form.label "Add notes about this swim spot", class: "font-semibold" %><br>
+    <%= form.text_area :notes, class: "form-input" %>
+    <% spot.errors.full_messages_for(:notes).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <br>
+  <p class="font-semibold">Locate your swim spot on the map. You can search, drag and click.</p>
+  <%= content_tag :div, data: 
+  { 
+    controller: "map",
+    map_access_token_value: "pk.eyJ1IjoiaW9uYWpvc2VwaGluZSIsImEiOiJjbGZvMm5iMGkwczBqNDRyMndkMGlhazI3In0.bE3vEzdNG5IGV1yzhu3gGg",
+    map_latitude_value: @spot.latitude,
+    map_longitude_value: @spot.longitude,
+    map_zoom_value: @spot.persisted? ? 12 : nil,
+    map_marker_value: @spot.persisted?,
+    map_geocoder_value: true
+  } do %>
+  <div class="w-96 h-96 bg-pink-200" id='map' data-map-target='map'></div>
+<% end %>
+
+  <p class="font-semibold">NB: Latitude and longitude will be auto-populated if you choose your spot on the map.</p>
   <div>
     <%= form.label :latitude %><br>
     <%= form.text_field :latitude, class: "form-input" %><br>
@@ -24,40 +58,11 @@
   </div>
 
   <div>
-    <% Spot.conditions.keys.each do |condition| %>
-      <%= form.radio_button :condition, condition %>
-      <%= form.label "condition_#{condition}" %><br>
-    <% end %>
-    <% spot.errors.full_messages_for(:condition).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div><br>
-
-  <div>
-    <%= form.label :notes %><br>
-    <%= form.text_field :notes, class: "form-input" %>
-    <% spot.errors.full_messages_for(:notes).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
     <%= form.submit class: "btn px-3 py-1.5 my-2" %>
   </div>
 <% end %>
 
-<%= content_tag :div, data: 
-  { 
-    controller: "map",
-    map_access_token_value: "pk.eyJ1IjoiaW9uYWpvc2VwaGluZSIsImEiOiJjbGZvMm5iMGkwczBqNDRyMndkMGlhazI3In0.bE3vEzdNG5IGV1yzhu3gGg",
-    map_latitude_value: @spot.latitude,
-    map_longitude_value: @spot.longitude,
-    map_zoom_value: @spot.persisted? ? 12 : nil,
-    map_marker_value: @spot.persisted?,
-    map_geocoder_value: true
-  } do %>
-  <div class="w-96 h-96 bg-pink-200" id='map' data-map-target='map'></div>
-<% end %>
+
 
 
 

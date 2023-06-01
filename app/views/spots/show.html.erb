@@ -36,17 +36,11 @@
     data-map-marker-value="true">
     <div class="w-96 h-96 bg-pink-200" data-map-target='map'></div>
   </div>
-
-
-  <h3 class="h3">Latitude & Longitude:</h3> 
-  <ul>
-    <li><%= @spot.latitude %></li>
-    <li><%= @spot.longitude %></li>
-  </ul>
-  <h3 class="h3">Nearest Tidal Data Station: <%= @spot.station&.name || "Not assigned" %></h3>
-  <h3 class="h3">The conditions required for this spot:</h3>
+  <br>
+  <p>The latitude for this spot is <%= @spot.latitude %> and the longitude is <%= @spot.longitude %>. The tidal data for this spot comes from <%= @spot.station&.name || "Not assigned" %>.</p>
+  <h3 class="h3">You have set the conditions required for this spot to be:</h3>
   <p> <%= @spot.condition&.humanize || "Not set yet" %></p>
-  <h3 class="h3">Notes:</h3>
+  <h3 class="h3">Your notes for this spot:</h3>
    <p><%= @spot.notes %></p>
   <br><br>
   <p>
