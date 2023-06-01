@@ -12,7 +12,7 @@
                     } %>
   </p>
 
-  <h2 class="font-bold text-2xl mb-4">When's good for <%= @spot.name %>?</h2>
+  <h2 class="h2">When's good for <%= @spot.name %>?</h2>
   <% if @spot.station_id %>
     <ul>
       <% @spot.grouped_tides(:seven_days).each do |date, tides|%>

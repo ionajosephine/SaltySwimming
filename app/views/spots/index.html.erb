@@ -3,7 +3,7 @@
   <%= link_to "New Spot", new_spot_path, class: "btn px-3 py-1.5 my-2" %>
 
   <% @spots.each do |spot| %>
-    <h2 class="font-bold text-2xl mt-5 mb-2"><%= link_to spot.name, spot_path(spot.id) %></h2>
+    <h2 class="h2"><%= link_to spot.name, spot_path(spot.id) %></h2>
     <ul>
       <% spot.grouped_tides(:today_and_tomorrow).each do |date, tides|%>
       <li>

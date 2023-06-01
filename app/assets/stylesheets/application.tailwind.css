@@ -9,3 +9,7 @@
 .btn {
   @apply rounded-lg bg-violet-700 text-white font-medium;
 }
+
+.h2 {
+  @apply font-bold text-2xl mt-5 mb-2;
+}
