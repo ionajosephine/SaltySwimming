@@ -8,7 +8,7 @@
 - This allows the user to plan their wild swims without any hassle! No need to look at complicated tidal forecasts or trawl through Facebook groups.
 
 ## This web application is not currently taking open source contributions. 
-When it is released later this month and has been thoroughly user tested 
+When it is has been thoroughly user tested and new features are ready to be worked on
 the README will be updated with everything you need to 
 create your own tidal pool forecast web app or contribute to this one 🙌🌊 
 
