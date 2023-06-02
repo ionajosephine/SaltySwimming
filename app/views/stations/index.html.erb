@@ -1,5 +1,17 @@
-<div class="w-full h-screen">
+<div class="absolute top-0 left-0 w-full h-screen -z-10">
   <%= image_tag "hero.jpg", class: "object-cover w-full h-full" %>
+
+  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-center">
+    <div class="relative">
+      <div class="blur-2xl absolute top-0 left-0 w-full h-full bg-black/50">
+      </div>
+      <h1 class="relative text-4xl font-bold tracking-tight text-white sm:text-6xl rounded-2xl">Your personal tidal pool forecast.</h1>
+      <div class="relative mt-10 flex items-center justify-center gap-x-6">
+        <a href="#" class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">Get started</a>
+        <a href="#" class="text-sm font-semibold leading-6 text-white">Learn more <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
 </div>
 
 
