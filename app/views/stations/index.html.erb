@@ -5,10 +5,19 @@
     <div class="relative">
       <div class="blur-2xl absolute top-0 left-0 w-full h-full bg-black/50">
       </div>
-      <h1 class="relative text-4xl font-bold tracking-tight text-white sm:text-6xl rounded-2xl">Your personal tidal pool forecast.</h1>
+      <h1 class="relative text-4xl font-bold tracking-tight text-white sm:text-6xl rounded-2xl">Your personal tidal pool forecast...</h1>
       <div class="relative mt-10 flex items-center justify-center gap-x-6">
-        <a href="#" class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">Get started</a>
-        <a href="#" class="text-sm font-semibold leading-6 text-white">Learn more <span aria-hidden="true">→</span></a>
+        <%
+=begin%>
+ <a href="#" class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">Get started</a> 
+<%
+=end%>
+      <% if user_signed_in? %>
+        <%= link_to "Go To My Forecast -> 💦", spots_path, class: "btn px-3 py-1.5 my-2" %>
+      <% else %>
+        <%= link_to "Dive in 💦", new_user_session_path, class: "btn" %>
+      <% end %>
+
       </div>
     </div>
   </div>

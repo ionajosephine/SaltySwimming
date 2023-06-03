@@ -3,7 +3,7 @@
     <%= form.label "Give your swim spot a name", class: "font-semibold" %><br>
     <%= form.text_field :name, class: "form-input" %>
     <% spot.errors.full_messages_for(:name).each do |message| %>
-      <div><%= message %></div>
+      <div class="alert"><%= message %></div>
     <% end %>
   </div>
   <br>
@@ -14,7 +14,7 @@
       <%= form.label "condition_#{condition}" %><br>
     <% end %>
     <% spot.errors.full_messages_for(:condition).each do |message| %>
-      <div><%= message %></div>
+      <div class="alert"><%= message %></div>
     <% end %>
   </div><br>
 
@@ -22,7 +22,7 @@
     <%= form.label "Add notes about this swim spot", class: "font-semibold" %><br>
     <%= form.text_area :notes, class: "form-input" %>
     <% spot.errors.full_messages_for(:notes).each do |message| %>
-      <div><%= message %></div>
+      <div class="alert"><%= message %></div>
     <% end %>
   </div>
   <br>
@@ -45,7 +45,7 @@
     <%= form.label :latitude %><br>
     <%= form.text_field :latitude, class: "form-input" %><br>
     <% spot.errors.full_messages_for(:latitude).each do |message| %>
-      <div><%= message %></div>
+      <div class="alert"><%= message %></div>
     <% end %>
   </div>
 
@@ -53,7 +53,7 @@
     <%= form.label :longitude %><br>
     <%= form.text_field :longitude, class: "form-input" %><br>
     <% spot.errors.full_messages_for(:longitude).each do |message| %>
-      <div><%= message %></div>
+      <div class="alert"><%= message %></div>
     <% end %>
   </div>
 

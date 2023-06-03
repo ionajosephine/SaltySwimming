@@ -30,3 +30,11 @@
   @apply font-semibold text-lg mt-5 mb-2;
 
 }
+
+.alert {
+  @apply text-red-600;
+}
+
+.notice {
+  @apply text-green-700;
+}
