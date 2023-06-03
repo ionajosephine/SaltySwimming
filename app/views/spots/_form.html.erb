@@ -1,6 +1,6 @@
 <%= form_with model: spot do |form| %>
   <div>
-    <%= form.label "Give your swim spot a name", class: "font-semibold" %><br>
+    <%= form.label "Give your swim spot a name:", class: "font-semibold" %><br>
     <%= form.text_field :name, class: "form-input" %>
     <% spot.errors.full_messages_for(:name).each do |message| %>
       <div class="alert"><%= message %></div>
@@ -39,16 +39,15 @@
   } do %>
   <div class="w-96 h-96 bg-pink-200" id='map' data-map-target='map'></div>
 <% end %>
-
   <p class="font-semibold">NB: Latitude and longitude will be auto-populated if you choose your spot on the map.</p>
-  <div>
+  <br>
+<div>
     <%= form.label :latitude %><br>
     <%= form.text_field :latitude, class: "form-input" %><br>
     <% spot.errors.full_messages_for(:latitude).each do |message| %>
       <div class="alert"><%= message %></div>
     <% end %>
   </div>
-
   <div>
     <%= form.label :longitude %><br>
     <%= form.text_field :longitude, class: "form-input" %><br>
@@ -56,7 +55,7 @@
       <div class="alert"><%= message %></div>
     <% end %>
   </div>
-
+<br>
   <div>
     <%= form.submit class: "btn px-3 py-1.5 my-2" %>
   </div>

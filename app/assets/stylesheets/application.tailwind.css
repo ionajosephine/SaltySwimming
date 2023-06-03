@@ -7,7 +7,7 @@
 }
 
 .btn {
-  @apply rounded-lg bg-violet-700 text-white font-medium px-3 py-1.5 my-2;
+  @apply rounded-lg bg-teal-500 text-black font-medium px-3 py-1.5 my-2 hover:bg-orange-100 hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400;
 }
 
 .btn-destroy {
