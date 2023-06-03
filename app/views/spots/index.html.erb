@@ -1,34 +1,37 @@
 <div class="max-w-screen-md w-full mx-auto">
-  <h2 class="h2"> See all your tidal pools and swim spots in one place! </h2>
-
-  <% @spots.each do |spot| %>
-    <h2 class="h2"><%= link_to spot.name, spot_path(spot.id) %></h2>
-    <ul>
-      <li><%= link_to "See full 7 day forecast ->", spot_path(spot.id), class: "btn-other" %></li>  
-
-      <% spot.grouped_tides(:today_and_tomorrow).each do |date, tides|%>
-      <li>
-        <b>
-          <% if date.today? %>
-            Today
-          <% elsif date.tomorrow? %>
-            Tomorrow
-          <% else %>
-            <%= date.strftime("%a %e %b") %> 
-          <% end %>
-        </b><br>
+  <h2 class="h2"> Your forecast overview for today and tomorrow </h2>
+  <div class="grid gap-4 sm:grid-cols-2">
+    <% @spots.each do |spot| %>
+  <div class="rounded-lg border border-gray-300 bg-orange-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-6 py-5">
         <ul>
-          <% tides.each do |tide| %>
-            <li><%= tide.event.humanize %> at <%= tide.date_time.strftime("%R") %> with height of <%= tide.height %> metres </li>
+          <li class="text-xl font-bold"><%= spot.name%></li>
+          <li>  <%= link_to "→ see full 7 days", spot_path(spot.id), class: "btn-other text-sm" %></li>  
+          <br>
+          <% spot.grouped_tides(:today_and_tomorrow).each do |date, tides|%>
+          <li>
+            <b>
+              <% if date.today? %>
+                Today
+              <% elsif date.tomorrow? %>
+                Tomorrow
+              <% else %>
+                <%= date.strftime("%a %e %b") %> 
+              <% end %>
+            </b><br>
+            <ul>
+              <% tides.each do |tide| %>
+                <li><%= tide.event.humanize %> at <%= tide.date_time.strftime("%R") %> with height of <%= tide.height %> metres </li>
+              <% end %>
+            </ul>
+          </li>
           <% end %>
         </ul>
-      </li>
-      <% end %>
-    </ul>
-  <% end %>
-  <br>
-  <%= link_to "Add a New Spot!", new_spot_path, class: "btn px-3 py-1.5 my-2" %>
-  <br><br>
+      </div>
+    <% end %>
+    <br>
+    <%= link_to "Add a New Spot!", new_spot_path, class: "btn px-3 py-1.5 my-2" %>
+    <br><br>
+  </div>
 </div>
 
 

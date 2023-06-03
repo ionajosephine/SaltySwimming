@@ -11,15 +11,19 @@
 }
 
 .btn-destroy {
-  @apply rounded-lg bg-red-600 text-white font-medium px-3 py-1.5 my-2;
+  @apply rounded-lg bg-gradient-to-b from-red-600 to-red-700 text-white font-medium px-3 py-1.5 my-2;
 }
 
 .btn-edit {
-  @apply rounded-lg bg-yellow-400 text-black font-medium px-3 py-1.5 my-2; 
+  @apply rounded-lg bg-gradient-to-b from-yellow-400 to-yellow-500 text-black font-medium px-3 py-1.5 my-2; 
 }
 
 .btn-other {
-  @apply rounded-lg bg-violet-300 text-black px-3 py-1.5 my-2;
+  @apply rounded-lg bg-gradient-to-b from-violet-200 to-violet-300 text-black px-3 py-1.5 my-2;
+}
+
+.btn-special {
+  @apply rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 text-black font-medium hover:bg-orange-100 hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 shadow-lg shadow-cyan-500/50 px-6 py-2 my-2 hover:scale-100 hover:animate-bounce;
 }
 
 .h2 {
