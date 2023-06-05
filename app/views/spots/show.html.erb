@@ -49,14 +49,15 @@
         <br>
         <p>
           <%= link_to "Edit these details", edit_spot_path(@spot), class: "btn-edit" %>
-          <%= link_to "Destroy this spot", spot_path(@spot), class: "btn-destroy", data: {
-                            turbo_method: :delete,
-                            turbo_confirm: "Are you sure?"
-                          } %>
         </p>
         <br>
         <p class="text-purple-800">🧜‍♀️ Did you know? The tidal data for this spot comes from <%= @spot.station&.name || "Not assigned" %>. <%= link_to "Learn more ->", behind_the_scenes_path, class: "btn-other" %></p> 
-        <br><br>
+        <br>
+        <p><%= link_to "Remove this spot", spot_path(@spot), class: "btn-destroy", data: {
+                            turbo_method: :delete,
+                            turbo_confirm: "Are you sure?"
+                          } %></p>
+                          <br>
   </div>
   </div>
 </div>

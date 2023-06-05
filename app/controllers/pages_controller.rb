@@ -10,4 +10,7 @@ class PagesController < ApplicationController
 
   def tidal_variation
   end
+
+  def faqs
+  end
 end

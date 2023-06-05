@@ -7,19 +7,19 @@
 }
 
 .btn {
-  @apply rounded-lg bg-gradient-to-b from-teal-300 to-teal-500 text-black font-medium px-3 py-1.5 my-2 hover:bg-orange-100 hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400;
+  @apply rounded-lg bg-gradient-to-b from-teal-300 to-teal-500 text-black hover:bg-gradient-to-b hover:from-red-300 hover:to-violet-400 font-medium px-3 py-1.5 my-2 hover:bg-orange-100 hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 hover:scale-110;
 }
 
 .btn-destroy {
-  @apply rounded-lg bg-gradient-to-b from-red-600 to-red-700 text-white font-medium px-3 py-1.5 my-2;
+  @apply rounded-lg bg-gradient-to-b from-red-600 to-red-700 hover:bg-gradient-to-b hover:from-red-500 hover:to-red-600 text-white font-medium px-3 py-1.5 my-2;
 }
 
 .btn-edit {
-  @apply rounded-lg bg-gradient-to-b from-yellow-400 to-yellow-500 text-black font-medium px-3 py-1.5 my-2; 
+  @apply rounded-lg bg-gradient-to-b from-yellow-400 hover:to-yellow-500 hover:bg-gradient-to-b hover:from-yellow-300 to-yellow-400 text-black font-medium px-3 py-1.5 my-2; 
 }
 
 .btn-other {
-  @apply rounded-lg bg-gradient-to-b from-violet-200 to-violet-300 text-black px-3 py-1.5 my-2;
+  @apply rounded-lg bg-gradient-to-b from-violet-200 to-violet-300 hover:bg-gradient-to-b hover:from-blue-200 hover:to-blue-300 text-black px-3 py-1.5 my-2;
 }
 
 .btn-special {

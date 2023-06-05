@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "/behind-the-scenes", to: "pages#innovation"
   get "/the-why-of-salty-swimming", to: "pages#why"
   get "/what-affects-tidal-variation", to: "pages#tidal_variation"
+  get "/faqs", to: "pages#faqs"
 
   resources :stations, only: [:index, :show]
   resources :spots
