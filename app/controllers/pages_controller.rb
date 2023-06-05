@@ -13,4 +13,10 @@ class PagesController < ApplicationController
 
   def faqs
   end
+
+  def blog
+  end
+
+  def visit
+  end
 end

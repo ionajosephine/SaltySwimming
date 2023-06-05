@@ -7,9 +7,11 @@ Rails.application.routes.draw do
   root to: "stations#index"
   get "/about", to: "pages#about"
   get "/behind-the-scenes", to: "pages#innovation"
-  get "/the-why-of-salty-swimming", to: "pages#why"
+  get "/tidal-pool-forecasting", to: "pages#why"
   get "/what-affects-tidal-variation", to: "pages#tidal_variation"
   get "/faqs", to: "pages#faqs"
+  get "/blog", to: "pages#blog"
+  get "why-visit-a-tidal-pool", to: "pages#visit"
 
   resources :stations, only: [:index, :show]
   resources :spots
