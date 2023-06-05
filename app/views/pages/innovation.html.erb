@@ -1,17 +1,20 @@
 <div class="max-w-screen-md w-full mx-auto bg-teal-50 px-3">
   <h2 class="h2">Behind the Scenes: The Making of Salty Swimming</h2>
   <p>Have you been wondering how Salty Swimming works behind the scenes? A little like tidal pools, software development can be mysterious. At first glance you may not notice the camouflaged creatures busy under the water. The same goes for the work that went into building your favourite tidal pool forecast! </p>
+  <%= image_tag "ss3.jpeg", class: "h-full w-full object-cover" %>
+
   <h3 class="h3">Who’s behind it?</h3>
   <p>The inspiration for Salty Swimming came from a passionate wild swimmer from Cornwall in the UK who recognised the need for a user-friendly solution to streamline the swim planning process. In her local area the coastline is wild and beautiful with many hidden gems including tidal pools and beaches that only appear under certain tidal conditions. </p>
   <br>
   <p>A conversation with a fellow wild swimmer and <a href="https://www.linkedin.com/in/ionameadows/?trk=public_profile_browsemap&originalSubdomain=fr" class="external-link">software developer</a> with a particular interest in environmental science led to the commission of the project. Understanding the challenges faced by swimmers who seek the best spots for their aquatic adventures, especially those who are not technologically inclined, was the first stage. That meant talking to other wild swimmers and cold water dippers.</p>
   <h3 class="h3">How does it work?</h3>
+  <%= image_tag "screenshot1.jpeg", class: "h-full w-full object-cover" %><br>
   <p>There were some unique challenges given the little-known complexities of tidal pools and hidden coastal beaches. There are many factors that contribute to the appearance of these special places. Similarly there are multiple options for technologies to build the software itself so choosing these tools was an important part of the process.</p>
   <br>
   <p>Salty Swimming is powered by Ruby on Rails and it combines tidal data from the <a href="https://data.admiralty.co.uk/portal/apps/sites/#/marine-data-portal/pages/tidal-data-services" class="external-link">Admiralty API</a> with interactive mapping software from <a href="https://www.mapbox.com/" class="external-link">Mapbox</a> to give a seamless experience for users. The MVP ('minimum viable product') needed to allow users to create their own personal swim spots on a map, adding details such as high tide or low tide requirements. It needed to also allow for notes to be added to each spot to make it easy to recall specific locations. </p>
   <br>
   <p>With the above in place, Salty Swimming’s calculations result in immediate access to information about which of your locations will be good to visit and when for up to 7 days. </p>
   <br>
-  <p>🧜‍♀️ You might also be interested to read: <%= link_to "The Why of Salty Swimming", the_why_of_salty_swimming_path, class: "btn-other" %></p>
+  <p>🧜‍♀️ You might also be interested to read: <%= link_to "Tidal Pool Forecasting: Why is it complicated?", tidal_pool_forecasting_path, class: "btn-other" %></p>
 <br>
 </div>
