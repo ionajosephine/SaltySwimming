@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .form-input {
-  @apply bg-purple-200 rounded-lg;
+  @apply bg-purple-50 rounded-lg;
 }
 
 .btn {

@@ -1,64 +1,62 @@
 <div class="max-w-screen-md w-full mx-auto">
   <h2 class="h2">When's good for <%= @spot.name %>?</h2>
-    <div class="flex basis-1/4 md:basis-1/3 place-content-end"><%= link_to "Add a New Spot →", new_spot_path, class: "btn px-3 py-1.5 my-2" %></div>
-
-
-<div class="grid gap-4 sm:grid-cols-2">
-<div>
-  <% if @spot.station_id %>
-    <ul>
-      <% @spot.grouped_tides(:seven_days).each do |date, tides|%>
-      <div class="rounded-lg border border-gray-300 bg-teal-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-6 py-5">
-      <li>
-        <b>
-          <% if date.today? %>
-            Today
-          <% elsif date.tomorrow? %>
-            Tomorrow
-          <% else %>
-            <%= date.strftime("%a %e %b") %> 
-          <% end %>
-        </b><br>
-        <ul>
-          <% tides.each do |tide| %>
-            <li><%= tide.event.humanize %> at <%= tide.date_time.strftime("%R") %> with height of <%= tide.height %> metres </li>
-          <% end %>
-        </ul>
-      </li>
+  <div class="flex basis-1/4 md:basis-1/3 place-content-end"><%= link_to "Add a New Spot →", new_spot_path, class: "btn px-3 py-1.5 my-2" %></div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div>
+        <% if @spot.station_id %>
+          <ul>
+            <% @spot.grouped_tides(:seven_days).each do |date, tides|%>
+            <div class="rounded-lg border border-gray-300 bg-teal-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-6 py-5">
+            <li>
+              <b>
+                <% if date.today? %>
+                  Today
+                <% elsif date.tomorrow? %>
+                  Tomorrow
+                <% else %>
+                  <%= date.strftime("%a %e %b") %> 
+                <% end %>
+              </b><br>
+              <ul>
+                <% tides.each do |tide| %>
+                  <li><%= tide.event.humanize %> at <%= tide.date_time.strftime("%R") %> with height of <%= tide.height %> metres </li>
+                <% end %>
+              </ul>
+            </li>
+            </div>
+            <br>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>There is no tide data available for this spot.</p>
+        <% end %>
       </div>
-      <br>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>There is no tide data available for this spot.</p>
-  <% end %>
-</div>
-<div>
-  <div data-controller="map" 
-    data-map-access-token-value="pk.eyJ1IjoiaW9uYWpvc2VwaGluZSIsImEiOiJjbGZvMm5iMGkwczBqNDRyMndkMGlhazI3In0.bE3vEzdNG5IGV1yzhu3gGg"
-    data-map-latitude-value="<%= @spot.latitude %>"
-    data-map-longitude-value="<%= @spot.longitude %>"
-    data-map-zoom-value="12"
-    data-map-marker-value="true">
-    <div class="w-96 h-96 bg-pink-200 border rounded-lg" data-map-target='map'></div>
-  </div>
-  <br>
-<div class="rounded-lg border border-gray-300 bg-orange-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-6 py-5">
-  <h3 class="h3">Your notes for this spot:</h3>
-   <p><i>"<%= @spot.notes %>"</i></p>
-   <br>
-  <p>You have set the conditions required for this spot to be: <b><%= @spot.condition&.humanize || "Not set yet" %></b></p>
-  <br>
-  <p>
-    <%= link_to "Edit these details", edit_spot_path(@spot), class: "btn-edit" %>
-    <%= link_to "Destroy this spot", spot_path(@spot), class: "btn-destroy", data: {
-                      turbo_method: :delete,
-                      turbo_confirm: "Are you sure?"
-                    } %>
-  </p>
-  <br>
-  <p class="text-purple-800">🧜‍♀️ Did you know? The tidal data for this spot comes from <%= @spot.station&.name || "Not assigned" %>. <%= link_to "Learn more ->", behind_the_scenes_path, class: "btn-other" %></p> 
-  <br><br>
+      <div>
+        <div data-controller="map" 
+          data-map-access-token-value="pk.eyJ1IjoiaW9uYWpvc2VwaGluZSIsImEiOiJjbGZvMm5iMGkwczBqNDRyMndkMGlhazI3In0.bE3vEzdNG5IGV1yzhu3gGg"
+          data-map-latitude-value="<%= @spot.latitude %>"
+          data-map-longitude-value="<%= @spot.longitude %>"
+          data-map-zoom-value="12"
+          data-map-marker-value="true">
+          <div class="w-96 h-96 bg-pink-200 border rounded-lg" data-map-target='map'></div>
+        </div>
+        <br>
+      <div class="rounded-lg border border-gray-300 bg-orange-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-6 py-5">
+        <h3 class="h3">Your notes for this spot:</h3>
+        <p><i>"<%= @spot.notes %>"</i></p>
+        <br>
+        <p>You have set the conditions required for this spot to be: <b><%= @spot.condition&.humanize || "Not set yet" %></b></p>
+        <br>
+        <p>
+          <%= link_to "Edit these details", edit_spot_path(@spot), class: "btn-edit" %>
+          <%= link_to "Destroy this spot", spot_path(@spot), class: "btn-destroy", data: {
+                            turbo_method: :delete,
+                            turbo_confirm: "Are you sure?"
+                          } %>
+        </p>
+        <br>
+        <p class="text-purple-800">🧜‍♀️ Did you know? The tidal data for this spot comes from <%= @spot.station&.name || "Not assigned" %>. <%= link_to "Learn more ->", behind_the_scenes_path, class: "btn-other" %></p> 
+        <br><br>
   </div>
   </div>
 </div>
