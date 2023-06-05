@@ -37,7 +37,7 @@
     map_marker_value: @spot.persisted?,
     map_geocoder_value: true
   } do %>
-  <div class="w-96 h-96 bg-pink-200" id='map' data-map-target='map'></div>
+  <div class="w-96 h-96 bg-pink-200 border rounded-lg" id='map' data-map-target='map'></div>
 <% end %>
   <p class="font-semibold">NB: Latitude and longitude will be auto-populated if you choose your spot on the map.</p>
   <br>
@@ -60,6 +60,7 @@
     <%= form.submit class: "btn px-3 py-1.5 my-2" %>
   </div>
 <% end %>
+<br><br>
 
 
 

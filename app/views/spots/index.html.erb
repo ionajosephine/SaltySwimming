@@ -1,5 +1,7 @@
-<div class="max-w-screen-md w-full mx-auto">
+<div class="max-w-screen-md w-full mx-auto px-5">
   <h2 class="h2"> Your forecast overview for today and tomorrow </h2>
+  <div class="flex basis-1/4 md:basis-1/3 place-content-end"><%= link_to "Add a New Spot!", new_spot_path, class: "btn px-3 py-1.5 my-2" %></div>
+  <br><br>
   <div class="grid gap-4 sm:grid-cols-2">
     <% @spots.each do |spot| %>
   <div class="rounded-lg border border-gray-300 bg-orange-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-6 py-5">
@@ -29,7 +31,6 @@
       </div>
     <% end %>
     <br>
-    <%= link_to "Add a New Spot!", new_spot_path, class: "btn px-3 py-1.5 my-2" %>
     <br><br>
   </div>
 </div>

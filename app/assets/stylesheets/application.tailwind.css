@@ -7,7 +7,7 @@
 }
 
 .btn {
-  @apply rounded-lg bg-teal-500 text-black font-medium px-3 py-1.5 my-2 hover:bg-orange-100 hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400;
+  @apply rounded-lg bg-gradient-to-b from-teal-300 to-teal-500 text-black font-medium px-3 py-1.5 my-2 hover:bg-orange-100 hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400;
 }
 
 .btn-destroy {
@@ -41,4 +41,8 @@
 
 .notice {
   @apply text-green-700;
+}
+
+.external-link {
+  @apply text-blue-700 font-bold;
 }
