@@ -1,14 +1,16 @@
-<div class="max-w-screen-md w-full mx-auto">
-  <h2 class="h2"> Your forecast overview for today and tomorrow </h2>
+<div class="max-w-screen-md w-full mx-auto px-5">
+  <div class="flex items-center justify-between my-3">
+    <h2 class="font-bold text-2xl"> Your Dashboard</h2>
+    <%= link_to "Add a New Spot!", new_spot_path, class: "btn px-3 py-1.5 my-2" %>
+  </div>
   <div class="grid gap-4 sm:grid-cols-2">
     <% @spots.each do |spot| %>
-  <div class="rounded-lg border border-gray-300 bg-orange-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-6 py-5">
+    <%= link_to spot_path(spot), class: "contents" do %>
+    <div class="rounded-lg border border-gray-300 bg-orange-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-6 py-5">
         <ul>
           <li class="text-xl font-bold"><%= spot.name%></li>
-          <li>  <%= link_to "→ see full 7 days", spot_path(spot.id), class: "btn-other text-sm" %></li>  
-          <br>
           <% spot.grouped_tides(:today_and_tomorrow).each do |date, tides|%>
-          <li>
+          <li class="mt-3">
             <b>
               <% if date.today? %>
                 Today
@@ -20,18 +22,26 @@
             </b><br>
             <ul>
               <% tides.each do |tide| %>
-                <li><%= tide.event.humanize %> at <%= tide.date_time.strftime("%R") %> with height of <%= tide.height %> metres </li>
+                <li class="flex gap-x-1 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-teal-600">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>
+<span><%= tide.event.humanize %> at <%= tide.date_time.strftime("%R") %> &ndash;</span>
+<svg class="w-5 h-5 text-teal-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9498 7.94975L10.5356 9.36396L8.00079 6.828L8.00004 20H6.00004L6.00079 6.828L3.46451 9.36396L2.05029 7.94975L7.00004 3L11.9498 7.94975ZM21.9498 16.0503L17 21L12.0503 16.0503L13.4645 14.636L16.0008 17.172L16 4H18L18.0008 17.172L20.5356 14.636L21.9498 16.0503Z"></path></svg>
+<span> <%= tide.height %> metres </span></li>
               <% end %>
             </ul>
           </li>
           <% end %>
+          <li class="mt-2"><span class="btn-other text-sm">→ see full 7 days</span></li>  
+
         </ul>
       </div>
+      <% end %>
     <% end %>
     <br>
-    <%= link_to "Add a New Spot!", new_spot_path, class: "btn px-3 py-1.5 my-2" %>
     <br><br>
   </div>
+  <br>
 </div>
 
 

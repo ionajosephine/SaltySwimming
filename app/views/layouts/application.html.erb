@@ -30,7 +30,7 @@
         <div class="flex gap-x-5 font-semibold">
           <%= link_to_unless_current("About", { controller: "/pages", action: "about" }) %>
           <% if user_signed_in? %>
-            <%= link_to_unless_current("Spots", { controller: "/spots", action: "index" }) %>
+            <%= link_to_unless_current("Dashboard", { controller: "/spots", action: "index" }) %>
             <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete } %>
           <% else %>
             <%= link_to "Log in", new_user_session_path %>
