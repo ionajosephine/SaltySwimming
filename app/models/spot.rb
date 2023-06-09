@@ -3,7 +3,7 @@ class Spot < ApplicationRecord
   belongs_to :station, optional: true
   validates :latitude, :longitude, :name, :condition, presence: true
 
-  enum condition: [:high_water, :low_water, :other]
+  enum condition: [:high_water, :low_water, :both]
 
   before_save :set_station
 

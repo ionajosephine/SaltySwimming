@@ -4,7 +4,11 @@ class SpotDecorator < Draper::Decorator
   def preferred_tides
     if station 
       tides = TideServices::Tides.new(station.admiralty_id).call
+      if condition == "both"
+        tides
+      else
       tides.select { |tide| tide.event.underscore == condition }
+      end
     else
       []
     end
