@@ -22,11 +22,25 @@
             </b><br>
             <ul>
               <% tides.each do |tide| %>
-                <li class="flex gap-x-1 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-teal-600">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-</svg>
-<span><%= tide.event.humanize %> at <%= tide.date_time.strftime("%R") %> &ndash;</span>
-<svg class="w-5 h-5 text-teal-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9498 7.94975L10.5356 9.36396L8.00079 6.828L8.00004 20H6.00004L6.00079 6.828L3.46451 9.36396L2.05029 7.94975L7.00004 3L11.9498 7.94975ZM21.9498 16.0503L17 21L12.0503 16.0503L13.4645 14.636L16.0008 17.172L16 4H18L18.0008 17.172L20.5356 14.636L21.9498 16.0503Z"></path></svg>
+                <li class="flex gap-x-1 items-center">
+
+
+<% if tide.event == "HighWater" %>
+  <svg id="hightide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M5.63604 6.633L12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633H5.63604Z" fill="blue"></path></svg>
+  <span>High Tide <%= tide.date_time.strftime("%R") %></span>
+<% else %>
+  <svg id="lowtide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3.09747L7.05025 8.04722C4.31658 10.7809 4.31658 15.213 7.05025 17.9467C9.78392 20.6804 14.2161 20.6804 16.9497 17.9467C19.6834 15.213 19.6834 10.7809 16.9497 8.04722L12 3.09747ZM12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633L12 0.269043ZM7 12.997H17C17 15.7584 14.7614 17.997 12 17.997C9.23858 17.997 7 15.7584 7 12.997Z" fill="blue"></path></svg>
+  <span>Low Tide <%= tide.date_time.strftime("%R") %></span>
+<% end %>
+<% if tide.event == "HighWater" %>
+  <svg id="uparrow" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-700 " stroke="currentColor" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path fill-rule="evenodd" d="M12 20.25a.75.75 0 01-.75-.75V6.31l-5.47 5.47a.75.75 0 01-1.06-1.06l6.75-6.75a.75.75 0 011.06 0l6.75 6.75a.75.75 0 11-1.06 1.06l-5.47-5.47V19.5a.75.75 0 01-.75.75z" clip-rule="evenodd" />
+  </svg>
+<%else %>
+  <svg id="downarrow" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-700" stroke="currentColor" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v13.19l5.47-5.47a.75.75 0 111.06 1.06l-6.75 6.75a.75.75 0 01-1.06 0l-6.75-6.75a.75.75 0 111.06-1.06l5.47 5.47V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+  </svg>
+<% end %>
 <span> <%= tide.height %> metres </span></li>
               <% end %>
             </ul>
