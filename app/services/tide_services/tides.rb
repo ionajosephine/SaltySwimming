@@ -14,7 +14,7 @@ module TideServices
           ::Tide.new(
             event: tideEvent["EventType"],
             # Needs turning into a proper date format - perhaps some sort of helper or decorator method?
-            date_time: DateTime.parse(tideEvent["DateTime"]),
+            date_time: convert_to_uk_time(tideEvent["DateTime"]),
             height: tideEvent["Height"].round(1)
           )
         end
@@ -28,5 +28,10 @@ module TideServices
       conn.get("/uktidalapi/api/V1/Stations/#{@station_id}/TidalEvents", { duration: 7 })
     end
 
+    def convert_to_uk_time(datetime)
+      parsed_time = DateTime.parse(datetime)
+      uk_time = parsed_time.in_time_zone('London')
+      uk_time
+    end
   end
 end

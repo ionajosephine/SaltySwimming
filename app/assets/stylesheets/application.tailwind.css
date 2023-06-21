@@ -46,3 +46,7 @@
 .external-link {
   @apply text-blue-700 font-bold;
 }
+
+.internal-link {
+  @apply font-semibold underline decoration-violet-300 text-blue-900 hover:text-teal-600;
+}
