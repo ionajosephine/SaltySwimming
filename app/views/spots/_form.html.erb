@@ -1,70 +1,68 @@
-  <div class="grid gap-10 sm:grid-cols-2 rounded-lg border border-gray-300 bg-teal-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-4 sm:px-6 py-5">
-    <div class="">
-
+<div class="rounded-lg border border-gray-300 bg-teal-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-4 sm:px-6 py-5">
   <%= form_with model: spot do |form| %>
-    <p class="font-semibold">Locate your swim spot on the map. You can search, drag and click.</p>
-    <%= content_tag :div, data: 
-    { 
-      controller: "map",
-      map_access_token_value: "pk.eyJ1IjoiaW9uYWpvc2VwaGluZSIsImEiOiJjbGZvMm5iMGkwczBqNDRyMndkMGlhazI3In0.bE3vEzdNG5IGV1yzhu3gGg",
-      map_latitude_value: @spot.latitude,
-      map_longitude_value: @spot.longitude,
-      map_zoom_value: @spot.persisted? ? 12 : nil,
-      map_marker_value: @spot.persisted?,
-      map_geocoder_value: true
-    } do %>
-    <div class="w-full h-96 bg-pink-200 border rounded-lg" id='map' data-map-target='map'></div>
-  <% end %>
-    <div>    
-      <%= form.hidden_field :latitude %>
-      <%= form.hidden_field :longitude %>
-    </div>
-    </div>
     <div class="">
-    <div>
-      <%= form.label "Give your swim spot a name:", class: "font-semibold" %><br>
-      <%= form.text_field :name, class: "form-input w-full" %>
-      <% spot.errors.full_messages_for(:name).each do |message| %>
-        <div class="alert"><%= message %></div>
+      <p class="font-semibold">Locate your swim spot on the map. You can search, drag and click.</p>
+      <%= content_tag :div, data: 
+            { 
+              controller: "map",
+              map_access_token_value: "pk.eyJ1IjoiaW9uYWpvc2VwaGluZSIsImEiOiJjbGZvMm5iMGkwczBqNDRyMndkMGlhazI3In0.bE3vEzdNG5IGV1yzhu3gGg",
+              map_latitude_value: @spot.latitude,
+              map_longitude_value: @spot.longitude,
+              map_zoom_value: @spot.persisted? ? 12 : nil,
+              map_marker_value: @spot.persisted?,
+              map_geocoder_value: true
+            } do %>
+        <div class="w-full h-96 bg-pink-200 border rounded-lg" id='map' data-map-target='map'></div>
       <% end %>
+      <div>    
+        <%= form.hidden_field :latitude %>
+        <%= form.hidden_field :longitude %>
+      </div>
     </div>
-    <br>
-    <div>
-      <p class="font-semibold">Does this swim spot appear at high or low tide?</p>
-        
-      <% Spot.conditions.keys.each do |condition| %>
-        <%= form.radio_button :condition, condition %>
-        <span class="inline-flex"><%= form.label condition %>        
-        <% if condition === "low_water" %>
-          <svg id="lowtide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3.09747L7.05025 8.04722C4.31658 10.7809 4.31658 15.213 7.05025 17.9467C9.78392 20.6804 14.2161 20.6804 16.9497 17.9467C19.6834 15.213 19.6834 10.7809 16.9497 8.04722L12 3.09747ZM12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633L12 0.269043ZM7 12.997H17C17 15.7584 14.7614 17.997 12 17.997C9.23858 17.997 7 15.7584 7 12.997Z" fill="blue"></path></svg>
-        <% elsif condition === "high_water" %>
-          <svg id="hightide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M5.63604 6.633L12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633H5.63604Z" fill="blue"></path></svg>
-        <% else condition === "other" %>
-          <svg id="hightide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M5.63604 6.633L12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633H5.63604Z" fill="blue"></path></svg>
-          <svg id="lowtide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3.09747L7.05025 8.04722C4.31658 10.7809 4.31658 15.213 7.05025 17.9467C9.78392 20.6804 14.2161 20.6804 16.9497 17.9467C19.6834 15.213 19.6834 10.7809 16.9497 8.04722L12 3.09747ZM12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633L12 0.269043ZM7 12.997H17C17 15.7584 14.7614 17.997 12 17.997C9.23858 17.997 7 15.7584 7 12.997Z" fill="blue"></path></svg>
+    <div><br>
+      <div>
+        <%= form.label "Give your swim spot a name:", class: "font-semibold" %><br>
+        <%= form.text_field :name, class: "form-input w-full" %>
+        <% spot.errors.full_messages_for(:name).each do |message| %>
+          <div class="alert"><%= message %></div>
         <% end %>
-        </span>
+      </div>
         <br>
-      <% end %>
-      <% spot.errors.full_messages_for(:condition).each do |message| %>
-        <div class="alert"><%= message %></div>
-      <% end %>
-    </div><br>
-
-    <div>
-      <%= form.label "Add notes about this swim spot", class: "font-semibold" %><br>
-      <%= form.text_area :notes, class: "form-input w-full" %>
-      <% spot.errors.full_messages_for(:notes).each do |message| %>
-        <div class="alert"><%= message %></div>
-      <% end %>
-    </div>
-    <div>
-      <%= form.submit class: "btn px-3 py-1.5 my-2" %>
+      <div>
+        <p class="font-semibold">Does this swim spot appear at high or low tide?</p>
+        <% Spot.conditions.keys.each do |condition| %>
+          <%= form.radio_button :condition, condition %>
+          <span class="inline-flex"><%= form.label condition %>        
+            <% if condition === "low_water" %>
+              <svg id="lowtide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3.09747L7.05025 8.04722C4.31658 10.7809 4.31658 15.213 7.05025 17.9467C9.78392 20.6804 14.2161 20.6804 16.9497 17.9467C19.6834 15.213 19.6834 10.7809 16.9497 8.04722L12 3.09747ZM12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633L12 0.269043ZM7 12.997H17C17 15.7584 14.7614 17.997 12 17.997C9.23858 17.997 7 15.7584 7 12.997Z" fill="blue"></path></svg>
+            <% elsif condition === "high_water" %>
+              <svg id="hightide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M5.63604 6.633L12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633H5.63604Z" fill="blue"></path></svg>
+            <% elsif condition === "other" %>
+              <svg id="hightide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M5.63604 6.633L12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633H5.63604Z" fill="blue"></path></svg>
+              <svg id="lowtide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3.09747L7.05025 8.04722C4.31658 10.7809 4.31658 15.213 7.05025 17.9467C9.78392 20.6804 14.2161 20.6804 16.9497 17.9467C19.6834 15.213 19.6834 10.7809 16.9497 8.04722L12 3.09747ZM12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633L12 0.269043ZM7 12.997H17C17 15.7584 14.7614 17.997 12 17.997C9.23858 17.997 7 15.7584 7 12.997Z" fill="blue"></path></svg>
+            <% end %>
+          </span>
+          <br>
+        <% end %>
+        <% spot.errors.full_messages_for(:condition).each do |message| %>
+          <div class="alert"><%= message %></div>
+        <% end %>
+      </div><br>
+      <div>
+        <%= form.label "Add notes about this swim spot", class: "font-semibold" %><br>
+        <%= form.text_area :notes, class: "form-input w-full" %>
+        <% spot.errors.full_messages_for(:notes).each do |message| %>
+          <div class="alert"><%= message %></div>
+        <% end %>
+      </div>
+      </div>
+      <div>
+        <%= form.submit class: "btn px-3 py-1.5 my-2" %>
+      </div>
     </div>
   <% end %>
-  </div>
 </div>
-
+<br><br>
 
 
 
