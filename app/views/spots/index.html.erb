@@ -3,6 +3,9 @@
     <h2 class="font-bold text-2xl"> Your Dashboard</h2>
     <%= link_to "Add a New Spot!", new_spot_path, class: "btn px-3 py-1.5 my-2" %>
   </div>
+  <% unless @spots.any? %>
+    <p>Your dashboard is empty because you don't have any swim spots yet! Once you add them they'll appear here.</p>
+  <% end %>
   <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
     <% @spots.each do |spot| %>
       <%= link_to spot_path(spot), class: "contents" do %>
