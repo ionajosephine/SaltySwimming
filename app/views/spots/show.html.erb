@@ -4,8 +4,14 @@
     <div class="grid gap-4 sm:grid-cols-2">
       <div>
         <% if @spot.station_id %>
+        <% if @spot.grouped_tides(:today_and_tomorrow).empty? %>
+
+                  <p>We're sorry, there is no tide data available for this spot at the moment.</p>
+                  <% else %>
+
           <ul>
             <% @spot.grouped_tides(:seven_days).each do |date, tides|%>
+            
             <div class="rounded-lg border border-gray-300 bg-teal-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-6 py-5">
             <li>
               <b>
@@ -54,8 +60,9 @@
             <br>
             <% end %>
           </ul>
+          <% end %>
         <% else %>
-          <p>There is no tide data available for this spot.</p>
+                  <p>We're sorry, there is no tide data available for this spot at the moment.</p>
         <% end %>
       </div>
       <div>
