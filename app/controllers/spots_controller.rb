@@ -52,6 +52,6 @@ class SpotsController < ApplicationController
     end
 
     def load_spots
-      @spots = current_user.spots
+      @spots = current_user.spots.order("LOWER(name) ASC")
     end
 end

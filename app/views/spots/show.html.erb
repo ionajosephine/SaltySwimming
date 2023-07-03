@@ -96,7 +96,7 @@
           <%= link_to "Edit these details", edit_spot_path(@spot), class: "btn-edit" %>
         </p>
         <br>
-        <p class="text-purple-800">🧜‍♀️ Did you know? The tidal data for this spot comes from <%= @spot.station&.name || "Not assigned" %>. <%= link_to "Learn more ->", behind_the_scenes_path, class: "btn-other" %></p> 
+        <p class="text-purple-800">🧜‍♀️ Did you know? The tidal data for this spot comes from <%= @spot.station&.name || "Not assigned" %>. <%= link_to "Learn more ->", behind_the_scenes_path, class: "internal-link" %></p> 
         <br>
         <p><%= link_to "Remove this spot", spot_path(@spot), class: "btn-destroy", data: {
                             turbo_method: :delete,
