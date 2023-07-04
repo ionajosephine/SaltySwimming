@@ -1,2 +1,9 @@
 <h1>This is the weather index page</h1>
-<p><%= @dailylula.body %></p>
+<p>Weather for <%= @daily_summary["location"]["name"] %> 
+<% @daily_summary["timeSeries"].each do |day| %>
+  <ul>
+    <li><%= day["time"].to_date %></li>
+    <li> <%= day["dayMaxScreenTemperature"].round %> celcius</li>
+    <li> <%= day["nightProbabilityOfRain"] %>% probability of rain </li>
+  </ul><br>
+<% end %>
