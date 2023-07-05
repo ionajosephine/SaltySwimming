@@ -13,7 +13,9 @@
             <% @spot.grouped_tides(:seven_days).each do |date, tides|%>
             
             <div class="rounded-lg border border-gray-300 bg-teal-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-6 py-5">
-            <li>
+            <li class="flex gap-x-1 justify-between py-2">
+
+                <span class="flex items-center">
               <b>
                 <% if date.today? %>
                   Today
@@ -22,7 +24,11 @@
                 <% else %>
                   <%= date.strftime("%a %e %b") %> 
                 <% end %>
-              </b><br>
+              </b></span><br>
+<% summary_data = @spot.daily_weather_summary(@spot.latitude, @spot.longitude) %>
+<% weather_data = summary_data[:weather_by_date][date] %>
+
+              <span class="text-teal-700"> <%= weather_data[:summary_emoji] %></span></li>
               <ul>
                 <% tides.each do |tide| %>
                                 <li class="flex gap-x-1 justify-between py-2">
@@ -105,7 +111,25 @@
                           <br>
   </div>
   </div>
+  <div>
+    <%
+=begin%>
+ <p>Weather for <%= @spot.daily_weather_summary(@spot.latitude, @spot.longitude)["location"]["name"] %> 
+<% @spot.daily_weather_summary(@spot.latitude, @spot.longitude)["timeSeries"].each do |day| %>
+  <ul>
+    <li><%= day["time"].to_date %></li>
+    <li>Max temp: <%= day["dayMaxScreenTemperature"].round %> celcius</li>
+    <li>Feels like: <%= day["dayLowerBoundMaxFeelsLikeTemp"].round %> - <%= day["dayUpperBoundMaxFeelsLikeTemp"].round %> celcius</li>
+    <li><%= @spot.emoji_summary(day["daySignificantWeatherCode"]) %> </li>
+
+    <li> <%= day["nightProbabilityOfRain"] %>% probability of rain </li>
+  </ul><br>
+<% end %>  
+<%
+=end%>
+  </div>
 </div>
+
 
 
   

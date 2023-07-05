@@ -1,0 +1,3 @@
+module WeatherHelper
+  
+end
