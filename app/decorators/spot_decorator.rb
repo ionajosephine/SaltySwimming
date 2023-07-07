@@ -14,9 +14,6 @@ class SpotDecorator < Draper::Decorator
     end
   end
 
-
-  
-
   def tides_today
     preferred_tides.select { |tide| tide.date_time.present? && tide.date_time.today? }
   end

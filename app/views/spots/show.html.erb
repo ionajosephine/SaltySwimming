@@ -25,7 +25,13 @@
                   <%= date.strftime("%a %e %b") %> 
                 <% end %>
               </b></span><br>
-              <span class="text-teal-700"> <%= @spot.weather_by_date(@time_series)[date][:summary_emoji] %></span></li>
+
+              <span class="text-teal-700"> <% if @time_series.present? %>
+<%= @spot.weather_by_date(@time_series)[date][:summary_emoji] %>
+<% else %>
+  <p>No weather</p>
+<% end %>
+</span></li>
               <ul>
                 <% tides.each do |tide| %>
                                 <li class="flex gap-x-1 justify-between py-2">
