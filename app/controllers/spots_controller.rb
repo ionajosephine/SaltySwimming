@@ -1,3 +1,4 @@
+
 class SpotsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_spots
@@ -8,6 +9,9 @@ class SpotsController < ApplicationController
 
   def show
     @spot = @spots.find(params[:id]).decorate
+    @weather = WeatherServices::Daily.new.call(@spot.latitude, @spot.longitude).body
+    @daily_weather = @weather["features"].first["properties"]
+    @time_series = @weather["features"].first["properties"]["timeSeries"]
   end
 
   def new

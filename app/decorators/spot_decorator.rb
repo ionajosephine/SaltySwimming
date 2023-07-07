@@ -43,20 +43,7 @@ class SpotDecorator < Draper::Decorator
     end
   end
 
-  def daily_weather_summary(latitude, longitude)
-    weather_response = WeatherServices::Daily.new.call(latitude, longitude).body
-  
-    {
-      daily_weather: weather_response["features"].first["properties"],
-      weather_by_date: daily_weather(weather_response["features"].first["properties"]["timeSeries"]),
-      # weather_station_name: weather_response["location"]["name"]
-    }
-  end
-  
-
-  private
-
-  def daily_weather(time_series)
+  def weather_by_date(time_series)
     result = {}
     time_series.each do |day|
       result[day["time"].to_date] = {
@@ -68,6 +55,8 @@ class SpotDecorator < Draper::Decorator
     end
     result
   end
+
+  private
 
   def remove_nil_keys(grouped_data)
     grouped_data.reject { |date, _| date.nil? }
