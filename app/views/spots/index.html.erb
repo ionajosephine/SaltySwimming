@@ -34,7 +34,7 @@
                     <% if @time_series.present? && @time_series[spot.id].present? %>
                       <%= spot.weather_by_date(@time_series[spot.id])[date][:summary_emoji] %>
                     <% else %>
-                      <p>No weather</p>
+                      <p>🧜‍♀️</p>
                     <% end %>
                   </span>
                 </li>

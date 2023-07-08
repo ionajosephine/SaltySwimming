@@ -44,8 +44,8 @@ class SpotDecorator < Draper::Decorator
     result = {}
     time_series.each do |day|
       result[day["time"].to_date] = {
-        max_temp: day["dayMaxScreenTemperature"]&.round || "n/a",
-        min_temp: day["dayMinScreenTemperature"]&.round || "n/a",
+        max_temp: day["dayUpperBoundMaxTemp"]&.round || "n/a",
+        min_temp: day["nightLowerBoundMinTemp"]&.round || "n/a",
         lowest_feels: day["dayLowerBoundMaxFeelsLikeTemp"]&.round || "n/a",
         highest_feels: day["dayUpperBoundMaxFeelsLikeTemp"]&.round || "n/a",
         wind_direction: day["midday10MWindDirection"].present? ? wind_direction(day["midday10MWindDirection"]) : "n/a",

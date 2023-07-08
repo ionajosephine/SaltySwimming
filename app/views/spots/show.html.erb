@@ -30,7 +30,7 @@
                     <% if @time_series.present? %>
                       <%= @spot.weather_by_date(@time_series)[date][:summary_emoji] %>
                     <% else %>
-                      <p>No weather</p>
+                      <p>🧜‍♀️</p>
                     <% end %>
                   </span>
                 </li>
@@ -68,14 +68,22 @@
                 
                 <% if @time_series.present? && @time_series[@spot.id].present? %>
                   <% @weather = @spot.weather_by_date(@time_series)[date] %>
-                  <ul class="text-teal-900">
-                    <li>🌡 Temperature: <%= @weather[:min_temp] %> - <%= @weather[:max_temp] %> °c</li>
-                    <li>🤌 Feels like: <%= @weather[:lowest_feels] %> - <%= @weather[:highest_feels] %> °c</li>
-                    <li>🌂 Chance of rain: <%= @weather[:precipitation] %> %</li>
-                    <li>🌬 Wind: <%= @weather[:wind_speed] %> - <%= @weather[:wind_gust] %> mph <%= @weather[:wind_direction] %></li>
-                  </ul>
+                  <div class="flex gap-x-3 py-2 items-center justify-between">
+                    <div>
+                      <ul class="text-teal-900">
+                        <li class="">Temp 🌡 <%= @weather[:min_temp] %>-<%= @weather[:max_temp] %> °c </li>
+                        <li> Feels 🤌 <%= @weather[:lowest_feels] %>-<%= @weather[:highest_feels] %> °c </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <ul class="text-teal-900">
+                        <li class="">Rain 🌂  <%= @weather[:precipitation] %> %</li>
+                        <li>Wind 🌬 <%= @weather[:wind_speed] %>-<%= @weather[:wind_gust] %> mph <%= @weather[:wind_direction] %></li>
+                      </ul>
+                    </div>
+                  </div>
                 <% else %>
-                  <p>No weather</p>
+                  <p>🧜‍♀️ The weather forecast is currently unavailable but it's always worth looking for rainbows! 🌈</p>
                 <% end %>
 
 
