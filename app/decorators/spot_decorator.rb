@@ -44,9 +44,14 @@ class SpotDecorator < Draper::Decorator
     result = {}
     time_series.each do |day|
       result[day["time"].to_date] = {
-        max_temp: day["dayMaxScreenTemperature"].round,
-        lowest_feels: day["dayLowerBoundMaxFeelsLikeTemp"].round,
-        highest_feels: day["dayUpperBoundMaxFeelsLikeTemp"].round,
+        max_temp: day["dayMaxScreenTemperature"]&.round || "n/a",
+        min_temp: day["dayMinScreenTemperature"]&.round || "n/a",
+        lowest_feels: day["dayLowerBoundMaxFeelsLikeTemp"]&.round || "n/a",
+        highest_feels: day["dayUpperBoundMaxFeelsLikeTemp"]&.round || "n/a",
+        wind_direction: day["midday10MWindDirection"].present? ? wind_direction(day["midday10MWindDirection"]) : "n/a",
+        wind_speed: day["midday10MWindSpeed"].present? ? ms_to_mph(day["midday10MWindSpeed"]).round : "n/a",
+        wind_gust: day["midday10MWindGust"].present? ? ms_to_mph(day["midday10MWindGust"]).round : "n/a",
+        precipitation: day["dayProbabilityOfPrecipitation"] || "n/a",
         summary_emoji: emoji_summary(day["daySignificantWeatherCode"])
       }
     end
@@ -128,5 +133,16 @@ class SpotDecorator < Draper::Decorator
     end
   end
 
+  def wind_direction(degrees)
+    directions = %w[N NNE NE ENE E ESE SE SSE S SSW SW WSW W WNW NW NNW]
+    index = ((degrees % 360) / 22.5).round
+    directions[index]
+  end
 
+  def celcius_to_fareignheight
+  end
+
+  def ms_to_mph(ms)
+    mph = (ms * 2.2)
+  end
 end
