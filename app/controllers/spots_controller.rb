@@ -75,19 +75,7 @@ class SpotsController < ApplicationController
       @spots = current_user.spots.order("LOWER(name) ASC")
     end
 
-    def plural_weather(spots)
-      result = {}
-      time_series.each do |day|
-        result[day["time"].to_date] = {
-          max_temp: day["dayMaxScreenTemperature"].round,
-          lowest_feels: day["dayLowerBoundMaxFeelsLikeTemp"].round,
-          highest_feels: day["dayUpperBoundMaxFeelsLikeTemp"].round,
-          summary_emoji: emoji_summary(day["daySignificantWeatherCode"])
-        }
-      end
-      result
-    end
-
+    # My original code:
     # def create_time_series(spots)
     #   result = {}
     #   spots.each do |spot|
@@ -96,6 +84,7 @@ class SpotsController < ApplicationController
     #   result
     # end
 
+# Attempting to account for the API not giving back what we expect. This needs improvement though.
     def create_time_series(spots)
       result = {}
       spots.each do |spot|
@@ -109,7 +98,4 @@ class SpotsController < ApplicationController
       end
       result
     end
-    
-    
-
 end

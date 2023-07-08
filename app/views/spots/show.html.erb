@@ -1,123 +1,123 @@
 <div class="max-w-screen-md w-full mx-auto">
   <h2 class="h2">When's good for <%= @spot.name %>?</h2>
-  <div class="flex -basis-1/4 -md:basis-1/3 place-content-end"><%= link_to "Add a New Spot →", new_spot_path, class: "btn px-3 py-1.5 my-2" %></div>
-    <div class="grid gap-4 sm:grid-cols-2">
-      <div>
-        <% if @spot.station_id %>
+  <div class="flex -basis-1/4 -md:basis-1/3 place-content-end">
+    <%= link_to "Add a New Spot →", new_spot_path, class: "btn px-3 py-1.5 my-2" %>
+  </div>
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <% if @spot.station_id %>
         <% if @spot.grouped_tides(:today_and_tomorrow).empty? %>
-
-                  <p>We're sorry, there is no tide data available for this spot at the moment.</p>
-                  <% else %>
-
+          <p>We're sorry, there is no tide data available for this spot at the moment.
+          </p>
+        <% else %>
           <ul>
             <% @spot.grouped_tides(:seven_days).each do |date, tides|%>
-            
-            <div class="rounded-lg border border-gray-300 bg-teal-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-6 py-5">
-            <li class="flex gap-x-1 justify-between py-2">
-
-                <span class="flex items-center">
-              <b>
-                <% if date.today? %>
-                  Today
-                <% elsif date.tomorrow? %>
-                  Tomorrow
-                <% else %>
-                  <%= date.strftime("%a %e %b") %> 
-                <% end %>
-              </b></span><br>
-
-              <span class="text-teal-700"> <% if @time_series.present? %>
-<%= @spot.weather_by_date(@time_series)[date][:summary_emoji] %>
-<% else %>
-  <p>No weather</p>
-<% end %>
-</span></li>
-              <ul>
+              <div class="rounded-lg border border-gray-300 bg-teal-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-6 py-5">
+                <li class="flex gap-x-1 justify-between py-2">
+                  <span class="flex items-center">
+                    <b>
+                    <% if date.today? %>
+                      Today
+                    <% elsif date.tomorrow? %>
+                      Tomorrow
+                    <% else %>
+                      <%= date.strftime("%a %e %b") %> 
+                    <% end %>
+                    </b>
+                  </span>
+                  <br>
+                  <span class="text-teal-700"> 
+                    <% if @time_series.present? %>
+                      <%= @spot.weather_by_date(@time_series)[date][:summary_emoji] %>
+                    <% else %>
+                      <p>No weather</p>
+                    <% end %>
+                  </span>
+                </li>
+          <ul>
                 <% tides.each do |tide| %>
-                                <li class="flex gap-x-1 justify-between py-2">
-
-                <span class="flex items-center">
-
-                <% if tide.event == "HighWater" %>
-  <svg id="hightide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M5.63604 6.633L12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633H5.63604Z" fill="blue"></path></svg>
-  <span>High Tide <%= tide.date_time.strftime("%R") %></span>
-<% else %>
-  <svg id="lowtide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3.09747L7.05025 8.04722C4.31658 10.7809 4.31658 15.213 7.05025 17.9467C9.78392 20.6804 14.2161 20.6804 16.9497 17.9467C19.6834 15.213 19.6834 10.7809 16.9497 8.04722L12 3.09747ZM12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633L12 0.269043ZM7 12.997H17C17 15.7584 14.7614 17.997 12 17.997C9.23858 17.997 7 15.7584 7 12.997Z" fill="blue"></path></svg>
-  <span>Low Tide <%= tide.date_time.strftime("%R") %></span>
-<% end %>
-</span>
-<span class="flex items-center">
-
-                <% if tide.event == "HighWater" %>
-  <svg id="uparrow" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-700 " stroke="currentColor" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-  <path fill-rule="evenodd" d="M12 20.25a.75.75 0 01-.75-.75V6.31l-5.47 5.47a.75.75 0 01-1.06-1.06l6.75-6.75a.75.75 0 011.06 0l6.75 6.75a.75.75 0 11-1.06 1.06l-5.47-5.47V19.5a.75.75 0 01-.75.75z" clip-rule="evenodd" />
-  </svg>
-<%else %>
-  <svg id="downarrow" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-700" stroke="currentColor" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-  <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v13.19l5.47-5.47a.75.75 0 111.06 1.06l-6.75 6.75a.75.75 0 01-1.06 0l-6.75-6.75a.75.75 0 111.06-1.06l5.47 5.47V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-  </svg>
-<% end %>
-<span> <%= tide.height %> metres </span></li>
-
-                
-
-                
+                  <li class="flex gap-x-1 justify-between py-2">
+                    <span class="flex items-center">
+                      <% if tide.event == "HighWater" %>
+                        <svg id="hightide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M5.63604 6.633L12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633H5.63604Z" fill="blue"></path>
+                        </svg>
+                        <span>High Tide <%= tide.date_time.strftime("%R") %>
+                        </span>
+                      <% else %>
+                        <svg id="lowtide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3.09747L7.05025 8.04722C4.31658 10.7809 4.31658 15.213 7.05025 17.9467C9.78392 20.6804 14.2161 20.6804 16.9497 17.9467C19.6834 15.213 19.6834 10.7809 16.9497 8.04722L12 3.09747ZM12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633L12 0.269043ZM7 12.997H17C17 15.7584 14.7614 17.997 12 17.997C9.23858 17.997 7 15.7584 7 12.997Z" fill="blue"></path>
+                        </svg>
+                        <span>Low Tide <%= tide.date_time.strftime("%R") %>
+                        </span>
+                      <% end %>
+                    </span>
+                    <span class="flex items-center">
+                      <% if tide.event == "HighWater" %>
+                        <svg id="uparrow" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-700 " stroke="currentColor" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                          <path fill-rule="evenodd" d="M12 20.25a.75.75 0 01-.75-.75V6.31l-5.47 5.47a.75.75 0 01-1.06-1.06l6.75-6.75a.75.75 0 011.06 0l6.75 6.75a.75.75 0 11-1.06 1.06l-5.47-5.47V19.5a.75.75 0 01-.75.75z" clip-rule="evenodd" />
+                        </svg>
+                      <% else %>
+                        <svg id="downarrow" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-700" stroke="currentColor" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                          <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v13.19l5.47-5.47a.75.75 0 111.06 1.06l-6.75 6.75a.75.75 0 01-1.06 0l-6.75-6.75a.75.75 0 111.06-1.06l5.47 5.47V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                        </svg>
+                      <% end %>
+                      <span> <%= tide.height %> metres 
+                      </span>
+                  </li>
                 <% end %>
-              </ul>
-            </li>
-            </div>
-            <br>
-            <% end %>
           </ul>
-          <% end %>
-        <% else %>
-                  <p>We're sorry, there is no tide data available for this spot at the moment.</p>
+            </li>
+          </div>
+              <br>
         <% end %>
-      </div>
-      <div>
-        <div data-controller="map" 
+            </ul>
+            <% end %>
+      <% else %>
+        <p>We're sorry, there is no tide data available for this spot at the moment.</p>
+      <% end %>
+    </div>
+    <div>
+      <div data-controller="map" 
           data-map-access-token-value="pk.eyJ1IjoiaW9uYWpvc2VwaGluZSIsImEiOiJjbGZvMm5iMGkwczBqNDRyMndkMGlhazI3In0.bE3vEzdNG5IGV1yzhu3gGg"
           data-map-latitude-value="<%= @spot.latitude %>"
           data-map-longitude-value="<%= @spot.longitude %>"
           data-map-zoom-value="12"
           data-map-marker-value="true">
-          <div class="w-full h-96 bg-pink-200 border rounded-lg" data-map-target='map'></div>
+        <div class="w-full h-96 bg-pink-200 border rounded-lg" data-map-target='map'>
         </div>
-        <br>
+      </div>
+      <br>
       <div class="rounded-lg border border-gray-300 bg-orange-50 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 px-6 py-5">
         <h3 class="h3">Your notes for this spot:</h3>
         <p><i>"<%= @spot.notes %>"</i></p>
         <br>
-        <p>You have set the conditions required for this spot to be: <b><%= @spot.condition&.humanize || "Not set yet" %></b>  <span class="inline-flex">
-
-        <% if @spot.condition === "low_water" %>
-          <svg id="lowtide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3.09747L7.05025 8.04722C4.31658 10.7809 4.31658 15.213 7.05025 17.9467C9.78392 20.6804 14.2161 20.6804 16.9497 17.9467C19.6834 15.213 19.6834 10.7809 16.9497 8.04722L12 3.09747ZM12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633L12 0.269043ZM7 12.997H17C17 15.7584 14.7614 17.997 12 17.997C9.23858 17.997 7 15.7584 7 12.997Z" fill="blue"></path></svg>
-        <% elsif @spot.condition === "high_water" %>
-          <svg id="hightide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M5.63604 6.633L12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633H5.63604Z" fill="blue"></path></svg>
-        <% else %>
-          <svg id="lowtide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3.09747L7.05025 8.04722C4.31658 10.7809 4.31658 15.213 7.05025 17.9467C9.78392 20.6804 14.2161 20.6804 16.9497 17.9467C19.6834 15.213 19.6834 10.7809 16.9497 8.04722L12 3.09747ZM12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633L12 0.269043ZM7 12.997H17C17 15.7584 14.7614 17.997 12 17.997C9.23858 17.997 7 15.7584 7 12.997Z" fill="blue"></path></svg>
-          <svg id="hightide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M5.63604 6.633L12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633H5.63604Z" fill="blue"></path></svg>
-        <% end %>
-</span>
+        <p>You have set the conditions required for this spot to be: <b><%= @spot.condition&.humanize || "Not set yet" %></b>  
+          <span class="inline-flex">
+            <% if @spot.condition === "low_water" %>
+              <svg id="lowtide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3.09747L7.05025 8.04722C4.31658 10.7809 4.31658 15.213 7.05025 17.9467C9.78392 20.6804 14.2161 20.6804 16.9497 17.9467C19.6834 15.213 19.6834 10.7809 16.9497 8.04722L12 3.09747ZM12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633L12 0.269043ZM7 12.997H17C17 15.7584 14.7614 17.997 12 17.997C9.23858 17.997 7 15.7584 7 12.997Z" fill="blue"></path></svg>
+            <% elsif @spot.condition === "high_water" %>
+              <svg id="hightide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M5.63604 6.633L12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633H5.63604Z" fill="blue"></path></svg>
+            <% else %>
+              <svg id="lowtide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3.09747L7.05025 8.04722C4.31658 10.7809 4.31658 15.213 7.05025 17.9467C9.78392 20.6804 14.2161 20.6804 16.9497 17.9467C19.6834 15.213 19.6834 10.7809 16.9497 8.04722L12 3.09747ZM12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633L12 0.269043ZM7 12.997H17C17 15.7584 14.7614 17.997 12 17.997C9.23858 17.997 7 15.7584 7 12.997Z" fill="blue"></path></svg>
+              <svg id="hightide" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-600" stroke="currentColor" viewBox="0 0 24 24"><path d="M5.63604 6.633L12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633H5.63604Z" fill="blue"></path></svg>
+            <% end %>
+          </span>
         </p>
         <br>
         <p>
           <%= link_to "Edit these details", edit_spot_path(@spot), class: "btn-edit" %>
         </p>
         <br>
-        <p class="text-purple-800">🧜‍♀️ Did you know? The tidal data for this spot comes from <%= @spot.station&.name || "Not assigned" %>. <%= link_to "Learn more ->", behind_the_scenes_path, class: "internal-link" %></p> 
+        <p class="text-purple-800">🧜‍♀️ Did you know? The tidal data for this spot comes from <%= @spot.station&.name || "Not assigned" %>. <%= link_to "Learn more ->", behind_the_scenes_path, class: "internal-link" %>
+        </p> 
         <br>
         <p><%= link_to "Remove this spot", spot_path(@spot), class: "btn-destroy", data: {
                             turbo_method: :delete,
                             turbo_confirm: "Are you sure?"
-                          } %></p>
-                          <br>
-  </div>
-  </div>
-  <div>
-    
-
- 
+                          } %>
+        </p>
+        <br>
+      </div>
+    </div>
   </div>
 </div>
 
