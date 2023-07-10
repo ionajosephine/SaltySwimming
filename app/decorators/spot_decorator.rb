@@ -41,7 +41,9 @@ class SpotDecorator < Draper::Decorator
   end
 
   def weather
-    @weather ||= WeatherServices::Daily.new.call(latitude, longitude)
+    @weather ||= Rails.cache.fetch("#{cache_key_with_version}/daily_weather", expires_in: 4.hours) do
+      WeatherServices::Daily.new.call(latitude, longitude)
+    end
   end
 
   private
