@@ -27,8 +27,8 @@
                   </span>
                   <br>
                   <span class="text-teal-700"> 
-                    <% if @time_series.present? %>
-                      <%= @spot.weather_by_date(@time_series)[date][:summary_emoji] %>
+                    <% if @spot.weather.present? %>
+                      <%= spot.weather[date][:summary_emoji] %>
                     <% else %>
                       <p>🧜‍♀️</p>
                     <% end %>
@@ -66,19 +66,19 @@
                 <% end %>
 
                 
-                <% if @time_series.present? && @time_series[@spot.id].present? %>
-                  <% @weather = @spot.weather_by_date(@time_series)[date] %>
+                <% if @spot.weather.present? %>
+                  <% weather = @spot.weather[date] %>
                   <div class="flex gap-x-3 py-2 items-center justify-between">
                     <div>
                       <ul class="text-teal-900">
-                        <li class="">Temp 🌡 <%= @weather[:min_temp] %>-<%= @weather[:max_temp] %> °c </li>
-                        <li> Feels 🤌 <%= @weather[:lowest_feels] %>-<%= @weather[:highest_feels] %> °c </li>
+                        <li class="">Temp 🌡 <%= weather[:min_temp] %>-<%= weather[:max_temp] %> °c </li>
+                        <li> Feels 🤌 <%= weather[:lowest_feels] %>-<%= weather[:highest_feels] %> °c </li>
                       </ul>
                     </div>
                     <div>
                       <ul class="text-teal-900">
-                        <li class="">Rain 🌂  <%= @weather[:precipitation] %> %</li>
-                        <li>Wind 🌬 <%= @weather[:wind_speed] %>-<%= @weather[:wind_gust] %> mph <%= @weather[:wind_direction] %></li>
+                        <li class="">Rain 🌂  <%= weather[:precipitation] %> %</li>
+                        <li>Wind 🌬 <%= weather[:wind_speed] %>-<%= weather[:wind_gust] %> mph <%= weather[:wind_direction] %></li>
                       </ul>
                     </div>
                   </div>

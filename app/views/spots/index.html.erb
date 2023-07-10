@@ -31,8 +31,8 @@
                   </span>
                   <br>
                   <span class="text-teal-700"> 
-                    <% if @time_series.present? && @time_series[spot.id].present? %>
-                      <%= spot.weather_by_date(@time_series[spot.id])[date][:summary_emoji] %>
+                    <% if spot.weather.present? %>
+                      <%= spot.weather[date][:summary_emoji] %>
                     <% else %>
                       <p>🧜‍♀️</p>
                     <% end %>
