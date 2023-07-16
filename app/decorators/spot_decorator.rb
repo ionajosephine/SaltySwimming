@@ -2,8 +2,7 @@ class SpotDecorator < Draper::Decorator
   delegate_all
 
   def preferred_tides
-    if station 
-      tides = TideServices::Tides.new(station.admiralty_id).call
+    if station
       if condition == "both"
         tides
       else
@@ -31,11 +30,11 @@ class SpotDecorator < Draper::Decorator
   end
 
   def grouped_tides(method_name)
-    tides = public_send("tides_#{method_name}")
-    if tides.empty?
+    tide_group = public_send("tides_#{method_name}")
+    if tide_group.empty?
       {}
    else
-      grouped_data = tides.group_by { |tide| tide.date_time&.to_date }
+      grouped_data = tide_group.group_by { |tide| tide.date_time&.to_date }
       remove_nil_keys(grouped_data)
     end
   end
@@ -43,6 +42,12 @@ class SpotDecorator < Draper::Decorator
   def weather
     @weather ||= Rails.cache.fetch("#{cache_key_with_version}/daily_weather", expires_in: 4.hours) do
       WeatherServices::Daily.new.call(latitude, longitude)
+    end
+  end
+
+  def tides
+    @tides ||= Rails.cache.fetch("#{cache_key_with_version}/tides", expires_in: 1.hour) do
+      TideServices::Tides.new(station.admiralty_id).call
     end
   end
 

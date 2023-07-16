@@ -28,7 +28,7 @@
                   <br>
                   <span class="text-teal-700"> 
                     <% if @spot.weather.present? %>
-                      <%= spot.weather[date][:summary_emoji] %>
+                      <%= @spot.weather[date][:summary_emoji] %>
                     <% else %>
                       <p>🧜‍♀️</p>
                     <% end %>

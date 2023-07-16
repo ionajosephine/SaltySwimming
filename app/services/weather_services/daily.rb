@@ -6,10 +6,11 @@ module WeatherServices
     def call(latitude, longitude)
       response = make_request(latitude, longitude)
       if response.success? 
-        parse(response)
+        parse(response.body)
       else
         Rails.logger.info("Met Office API error HTTP status #{response.status}")
         {}
+        
       end
     end
 
@@ -23,12 +24,7 @@ module WeatherServices
     end
 
     def parse(response)
-
-      if response && response["features"].is_a?(Array) && response["features"].first && response["features"].first["properties"]
-        time_series = response["features"].first["properties"]["timeSeries"]
-      else
-        time_series = []
-      end
+      time_series = response.dig("features")&.first&.dig("properties", "timeSeries") || []
 
       result = {}
       time_series.each do |day|
