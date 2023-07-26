@@ -10,7 +10,6 @@ module WeatherServices
       else
         Rails.logger.info("Met Office API error HTTP status #{response.status}")
         {}
-        
       end
     end
 

@@ -51,6 +51,15 @@ class SpotDecorator < Draper::Decorator
     end
   end
 
+  def weather_emoji(date)
+    if weather.present?
+      weather.dig(date, :summary_emoji) 
+    else
+      "🧜‍♀️"
+    end
+  end
+
+
   private
 
   def remove_nil_keys(grouped_data)
